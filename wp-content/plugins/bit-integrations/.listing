@@ -1,0 +1,11 @@
+drwxr-xr-x    7 xgmztfmy   xgmztfmy         4096 Jul 31  2025 .
+drwxr-xr-x   25 xgmztfmy   xgmztfmy         4096 Apr  7 13:12 ..
+drwxr-xr-x    2 xgmztfmy   xgmztfmy        57344 Jul 31  2025 assets
+-rw-r--r--    1 xgmztfmy   xgmztfmy         2488 Jul 31  2025 bitwpfi.php
+-rw-r--r--    1 xgmztfmy   xgmztfmy            3 Jul 31  2025 build-hash.txt
+-rw-r--r--    1 xgmztfmy   xgmztfmy          881 Jul 31  2025 composer.json
+drwxr-xr-x   10 xgmztfmy   xgmztfmy         4096 Jul 31  2025 includes
+drwxr-xr-x    2 xgmztfmy   xgmztfmy         4096 Jul 31  2025 languages
+-rw-r--r--    1 xgmztfmy   xgmztfmy        63992 Jul 31  2025 readme.txt
+drwxr-xr-x    5 xgmztfmy   xgmztfmy         4096 Jul 31  2025 vendor
+drwxr-xr-x    2 xgmztfmy   xgmztfmy         4096 Jul 31  2025 views

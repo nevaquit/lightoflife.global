@@ -1,0 +1,14 @@
+drwxr-xr-x   10 xgmztfmy   xgmztfmy         4096 Jul 31  2025 .
+drwxr-xr-x    7 xgmztfmy   xgmztfmy         4096 Jul 31  2025 ..
+drwxr-xr-x  158 xgmztfmy   xgmztfmy         4096 Jul 31  2025 Actions
+drwxr-xr-x    2 xgmztfmy   xgmztfmy         4096 Jul 31  2025 Admin
+-rw-r--r--    1 xgmztfmy   xgmztfmy         7564 Jul 31  2025 Config.php
+drwxr-xr-x    5 xgmztfmy   xgmztfmy         4096 Jul 31  2025 Core
+drwxr-xr-x    2 xgmztfmy   xgmztfmy         4096 Jul 31  2025 Flow
+drwxr-xr-x    2 xgmztfmy   xgmztfmy         4096 Jul 31  2025 Log
+-rw-r--r--    1 xgmztfmy   xgmztfmy         5198 Jul 31  2025 Plugin.php
+drwxr-xr-x    2 xgmztfmy   xgmztfmy         4096 Jul 31  2025 Routes
+drwxr-xr-x   10 xgmztfmy   xgmztfmy         4096 Jul 31  2025 Triggers
+drwxr-xr-x    2 xgmztfmy   xgmztfmy         4096 Jul 31  2025 controller
+-rw-r--r--    1 xgmztfmy   xgmztfmy          793 Jul 31  2025 hooks.php
+-rw-r--r--    1 xgmztfmy   xgmztfmy          863 Jul 31  2025 loader.php
