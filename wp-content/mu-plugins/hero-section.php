@@ -1,8 +1,9 @@
 <?php
 /**
  * Replace Revolution Slider with a clean text-based hero section.
- * Outputs hero immediately after wp_body_open, hides RS module via CSS.
  */
+
+if (!is_admin()) {
 
 // Inject hero CSS in <head>
 add_action('wp_head', function() {
@@ -156,9 +157,10 @@ add_action('wp_head', function() {
     <?php
 }, 5);
 
-// Inject hero HTML right after opening body tag
-add_action('wp_body_open', function() {
+// Build the hero HTML
+function lol_hero_html() {
     if (!is_front_page() && !is_home()) return;
+    ob_start();
     ?>
     <div class="lol-hero">
         <div class="lol-hero-eyebrow">One Light &middot; One Truth &middot; One Global Mission</div>
@@ -173,7 +175,6 @@ add_action('wp_body_open', function() {
             <a href="<?php echo esc_url(home_url('/contact/')); ?>" class="lol-btn-outline">Join us &rarr;</a>
         </div>
     </div>
-
     <div class="lol-pillars">
         <div class="lol-pillar">
             <div class="lol-pillar-icon">
@@ -209,4 +210,51 @@ add_action('wp_body_open', function() {
         </div>
     </div>
     <?php
+    return ob_get_clean();
+}
+
+// Try wp_body_open first (modern themes)
+add_action('wp_body_open', function() {
+    echo lol_hero_html();
 }, 1);
+
+// Fallback: inject via wp_footer + JS to move hero above content
+add_action('wp_footer', function() {
+    if (!is_front_page() && !is_home()) return;
+    // Only run fallback if hero wasn't already output by wp_body_open
+    ?>
+    <script>
+    (function() {
+        if (document.querySelector('.lol-hero')) return; // already injected
+        var heroHTML = <?php echo json_encode(lol_hero_html()); ?>;
+        var temp = document.createElement('div');
+        temp.innerHTML = heroHTML;
+        // Find the best insertion point — after the nav/header, before main content
+        var targets = [
+            document.querySelector('#rev_slider_1_1_wrapper'),
+            document.querySelector('rs-module-wrap'),
+            document.querySelector('.rev_slider_wrapper'),
+            document.querySelector('.site-content'),
+            document.querySelector('#content'),
+            document.querySelector('main'),
+            document.querySelector('.container:not(nav .container):not(#header .container)')
+        ];
+        var target = targets.find(function(t) { return t; });
+        if (target) {
+            target.parentNode.insertBefore(temp.querySelector('.lol-hero'), target);
+            target.parentNode.insertBefore(temp.querySelector('.lol-pillars'), target);
+        } else {
+            // Last resort: prepend to body after header
+            var header = document.querySelector('#header, .navbar, header, nav');
+            if (header && header.nextSibling) {
+                header.parentNode.insertBefore(temp.querySelector('.lol-hero'), header.nextSibling);
+                var hero = document.querySelector('.lol-hero');
+                hero.parentNode.insertBefore(temp.querySelector('.lol-pillars'), hero.nextSibling);
+            }
+        }
+    })();
+    </script>
+    <?php
+}, 99);
+
+} // end !is_admin()
