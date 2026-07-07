@@ -1,0 +1,33 @@
+---
+import type { HomepageBlock } from '../lib/payload'
+import Hero from './Hero.astro'
+import MediaGrid from './MediaGrid.astro'
+import FeaturedSermons from './FeaturedSermons.astro'
+import FeaturedCauses from './FeaturedCauses.astro'
+import CtaBanner from './CtaBanner.astro'
+
+interface Props {
+  blocks: HomepageBlock[]
+}
+
+const { blocks } = Astro.props
+---
+
+{
+  blocks.map((block) => {
+    switch (block.blockType) {
+      case 'hero':
+        return <Hero block={block} />
+      case 'mediaGrid':
+        return <MediaGrid block={block} />
+      case 'featuredSermons':
+        return <FeaturedSermons block={block} />
+      case 'featuredCauses':
+        return <FeaturedCauses block={block} />
+      case 'ctaBanner':
+        return <CtaBanner block={block} />
+      default:
+        return null
+    }
+  })
+}

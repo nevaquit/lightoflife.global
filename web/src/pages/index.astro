@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import BlockRenderer from '../components/BlockRenderer.astro'
+import { getHomepage } from '../lib/payload'
+
+let homepage
+let error: string | null = null
+
+try {
+  homepage = await getHomepage()
+} catch (e) {
+  error = e instanceof Error ? e.message : 'Failed to load homepage'
+}
+---
+
+<BaseLayout>
+  {
+    error ? (
+      <section class="flex min-h-[60vh] items-center justify-center bg-oatmeal px-6">
+        <div class="max-w-lg text-center">
+          <h1 class="section-title">Welcome to Light of Life</h1>
+          <p class="section-subtitle mt-4">
+            Connect the CMS to see your homepage layout. Start the Payload worker at{' '}
+            <code class="rounded bg-oatmeal-dark px-2 py-1 text-sm">localhost:3001</code>.
+          </p>
+          <p class="mt-4 text-sm text-stone">{error}</p>
+        </div>
+      </section>
+    ) : homepage?.layout?.length ? (
+      <BlockRenderer blocks={homepage.layout} />
+    ) : (
+      <section class="flex min-h-[60vh] items-center justify-center bg-oatmeal px-6">
+        <div class="max-w-lg text-center">
+          <h1 class="section-title">Light of Life Global</h1>
+          <p class="section-subtitle mt-4">
+            Configure your homepage layout in the Payload admin panel.
+          </p>
+          <a href="/sermons" class="btn-primary mt-8">Explore Sermons</a>
+        </div>
+      </section>
+    )
+  }
+</BaseLayout>

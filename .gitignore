@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+dist/
+.next/
+.open-next/
+out/
+build/
+
+# Environment
+.env
+.env*.local
+.dev.vars
+
+# Cloudflare
+.wrangler/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Testing
+coverage/
+test-results/
+playwright-report/
+
+# Media (local uploads during dev)
+/media

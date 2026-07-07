@@ -1,0 +1,18 @@
+{
+  "name": "lightoflife-global",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Edge-native headless website for Light of Life Global",
+  "scripts": {
+    "dev:cms": "pnpm --filter @lightoflife/cms dev",
+    "dev:web": "pnpm --filter @lightoflife/web dev",
+    "build:cms": "pnpm --filter @lightoflife/cms build",
+    "build:web": "pnpm --filter @lightoflife/web build",
+    "deploy:cms": "pnpm --filter @lightoflife/cms deploy",
+    "deploy:web": "pnpm --filter @lightoflife/web deploy"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": "^9 || ^10"
+  }
+}

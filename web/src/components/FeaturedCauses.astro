@@ -1,0 +1,55 @@
+---
+import type { HomepageBlock } from '../lib/payload'
+import { getMediaUrl } from '../lib/payload'
+
+interface Props {
+  block: Extract<HomepageBlock, { blockType: 'featuredCauses' }>
+}
+
+const { block } = Astro.props
+const causes = Array.isArray(block.causes) ? block.causes : []
+---
+
+<section class="bg-cream py-20">
+  <div class="mx-auto max-w-7xl px-6">
+    <div class="mb-12 text-center">
+      <h2 class="section-title">{block.title}</h2>
+    </div>
+    <div class="grid gap-8 md:grid-cols-2">
+      {
+        causes.map((cause) => {
+          const imgUrl = getMediaUrl(typeof cause.image === 'object' ? cause.image : undefined)
+          const progress = Math.min(100, Math.round((cause.currentRaised / cause.donationGoal) * 100))
+          return (
+            <a href={`/causes/${cause.slug}`} class="card group flex flex-col md:flex-row">
+              <div class="aspect-[16/10] overflow-hidden bg-oatmeal-dark md:w-2/5">
+                {imgUrl && (
+                  <img
+                    src={imgUrl}
+                    alt={cause.title}
+                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                )}
+              </div>
+              <div class="flex flex-1 flex-col justify-center p-6">
+                <h3 class="font-serif text-xl text-espresso">{cause.title}</h3>
+                <div class="mt-4">
+                  <div class="h-2 overflow-hidden rounded-full bg-oatmeal-dark">
+                    <div
+                      class="h-full rounded-full bg-terracotta transition-all"
+                      style={`width: ${progress}%`}
+                    />
+                  </div>
+                  <p class="mt-2 text-sm text-stone">
+                    ${cause.currentRaised.toLocaleString()} raised of ${cause.donationGoal.toLocaleString()}
+                  </p>
+                </div>
+              </div>
+            </a>
+          )
+        })
+      }
+    </div>
+  </div>
+</section>

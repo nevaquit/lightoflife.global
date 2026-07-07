@@ -1,0 +1,24 @@
+# Light of Life Global — Payload CMS Worker
+# Docs: https://developers.cloudflare.com/workers/wrangler/configuration/
+
+name = "lightoflife-cms"
+main = ".open-next/worker.js"
+compatibility_date = "2026-07-07"
+compatibility_flags = ["nodejs_compat", "global_fetch_strictly_public"]
+
+[assets]
+directory = ".open-next/assets"
+binding = "ASSETS"
+
+[[d1_databases]]
+binding = "D1"
+database_name = "lightoflife-cms"
+database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+remote = true
+
+[[r2_buckets]]
+binding = "R2"
+bucket_name = "lightoflife-media"
+
+[vars]
+# Set PAYLOAD_SECRET via: wrangler secret put PAYLOAD_SECRET

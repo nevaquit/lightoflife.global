@@ -1,0 +1,9 @@
+# Light of Life Global — Astro Frontend (Cloudflare Pages)
+# Docs: https://developers.cloudflare.com/pages/functions/wrangler-configuration/
+
+name = "lightoflife-web"
+compatibility_date = "2026-07-07"
+pages_build_output_dir = "dist"
+
+[vars]
+PUBLIC_CMS_URL = "http://localhost:3001"

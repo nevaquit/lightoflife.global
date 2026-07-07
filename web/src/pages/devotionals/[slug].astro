@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import { getDevotionalBySlug } from '../../lib/payload'
+
+const { slug } = Astro.params
+const devotional = slug ? await getDevotionalBySlug(slug) : null
+
+if (!devotional) {
+  return Astro.redirect('/devotionals')
+}
+---
+
+<BaseLayout title={`${devotional.title} — Light of Life Global`}>
+  <article class="bg-cream">
+    <section class="bg-oatmeal py-16">
+      <div class="mx-auto max-w-3xl px-6">
+        {devotional.scriptureReference && (
+          <p class="text-sm font-semibold uppercase tracking-wider text-terracotta">
+            {devotional.scriptureReference}
+          </p>
+        )}
+        <h1 class="mt-2 font-serif text-4xl font-medium text-espresso">{devotional.title}</h1>
+        <time class="mt-4 block text-stone" datetime={devotional.publishDate}>
+          {new Date(devotional.publishDate).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })}
+        </time>
+      </div>
+    </section>
+
+    <section class="prose prose-lg mx-auto max-w-3xl px-6 py-12 text-charcoal">
+      <p class="text-stone">
+        Rich text content renders here once connected to the CMS Lexical serializer.
+      </p>
+    </section>
+  </article>
+</BaseLayout>

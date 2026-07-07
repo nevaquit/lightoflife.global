@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import { getSermons, getMediaUrl } from '../lib/payload'
+
+const sermons = await getSermons()
+---
+
+<BaseLayout title="Sermons — Light of Life Global" description="Watch and listen to inspiring sermons.">
+  <section class="bg-oatmeal py-16">
+    <div class="mx-auto max-w-7xl px-6">
+      <h1 class="section-title">Sermons</h1>
+      <p class="section-subtitle">Messages of faith, hope, and transformation.</p>
+    </div>
+  </section>
+
+  <section class="bg-cream py-16">
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          sermons.map((sermon) => {
+            const thumbUrl = getMediaUrl(
+              typeof sermon.thumbnail === 'object' ? sermon.thumbnail : undefined,
+            )
+            return (
+              <a href={`/sermons/${sermon.slug}`} class="card group">
+                <div class="aspect-video overflow-hidden bg-oatmeal-dark">
+                  {thumbUrl && (
+                    <img
+                      src={thumbUrl}
+                      alt={sermon.title}
+                      class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                  )}
+                </div>
+                <div class="p-5">
+                  <p class="text-xs font-semibold uppercase tracking-wider text-terracotta">
+                    {sermon.speaker}
+                  </p>
+                  <h2 class="mt-1 font-serif text-lg text-espresso">{sermon.title}</h2>
+                  <time class="mt-2 block text-sm text-stone" datetime={sermon.publishDate}>
+                    {new Date(sermon.publishDate).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                    })}
+                  </time>
+                </div>
+              </a>
+            )
+          })
+        }
+      </div>
+      {sermons.length === 0 && (
+        <p class="text-center text-stone">No sermons published yet.</p>
+      )}
+    </div>
+  </section>
+</BaseLayout>

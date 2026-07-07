@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import { getSermonBySlug, getMediaUrl } from '../../lib/payload'
+
+const { slug } = Astro.params
+const sermon = slug ? await getSermonBySlug(slug) : null
+
+if (!sermon) {
+  return Astro.redirect('/sermons')
+}
+
+const thumbUrl = getMediaUrl(
+  typeof sermon.thumbnail === 'object' ? sermon.thumbnail : undefined,
+)
+---
+
+<BaseLayout title={`${sermon.title} — Light of Life Global`}>
+  <article class="bg-cream">
+    <section class="bg-oatmeal py-16">
+      <div class="mx-auto max-w-4xl px-6">
+        <p class="text-sm font-semibold uppercase tracking-wider text-terracotta">{sermon.speaker}</p>
+        <h1 class="mt-2 font-serif text-4xl font-medium text-espresso md:text-5xl">{sermon.title}</h1>
+        <time class="mt-4 block text-stone" datetime={sermon.publishDate}>
+          {new Date(sermon.publishDate).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })}
+        </time>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-4xl px-6 py-12">
+      {thumbUrl && (
+        <img src={thumbUrl} alt={sermon.title} class="mb-10 w-full rounded-2xl shadow-md" />
+      )}
+
+      {sermon.videoUrl && (
+        <div class="mb-10 aspect-video overflow-hidden rounded-2xl bg-oatmeal-dark">
+          <iframe
+            src={sermon.videoUrl}
+            title={sermon.title}
+            class="h-full w-full"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          />
+        </div>
+      )}
+
+      {sermon.audioUrl && (
+        <div class="rounded-2xl bg-oatmeal p-6">
+          <p class="mb-4 text-sm font-semibold uppercase tracking-wider text-terracotta">Listen</p>
+          <audio controls class="w-full" src={sermon.audioUrl}>
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+      )}
+    </section>
+  </article>
+</BaseLayout>

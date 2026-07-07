@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import { getCauseBySlug, getMediaUrl } from '../../lib/payload'
+
+const { slug } = Astro.params
+const cause = slug ? await getCauseBySlug(slug) : null
+
+if (!cause) {
+  return Astro.redirect('/causes')
+}
+
+const imgUrl = getMediaUrl(typeof cause.image === 'object' ? cause.image : undefined)
+const progress = Math.min(100, Math.round((cause.currentRaised / cause.donationGoal) * 100))
+---
+
+<BaseLayout title={`${cause.title} — Light of Life Global`}>
+  <article class="bg-cream">
+    <section class="bg-oatmeal py-16">
+      <div class="mx-auto max-w-4xl px-6">
+        <h1 class="font-serif text-4xl font-medium text-espresso md:text-5xl">{cause.title}</h1>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-4xl px-6 py-12">
+      {imgUrl && (
+        <img src={imgUrl} alt={cause.title} class="mb-10 w-full rounded-2xl shadow-md" />
+      )}
+
+      <div class="rounded-2xl bg-oatmeal p-8">
+        <div class="flex items-end justify-between">
+          <div>
+            <p class="text-3xl font-serif text-espresso">${cause.currentRaised.toLocaleString()}</p>
+            <p class="text-sm text-stone">raised of ${cause.donationGoal.toLocaleString()} goal</p>
+          </div>
+          <span class="text-2xl font-semibold text-terracotta">{progress}%</span>
+        </div>
+        <div class="mt-4 h-3 overflow-hidden rounded-full bg-oatmeal-dark">
+          <div class="h-full rounded-full bg-terracotta" style={`width: ${progress}%`} />
+        </div>
+        <button class="btn-primary mt-8 w-full md:w-auto">Donate Now</button>
+      </div>
+    </section>
+  </article>
+</BaseLayout>

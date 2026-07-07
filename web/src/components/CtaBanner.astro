@@ -1,0 +1,22 @@
+---
+import type { HomepageBlock } from '../lib/payload'
+
+interface Props {
+  block: Extract<HomepageBlock, { blockType: 'ctaBanner' }>
+}
+
+const { block } = Astro.props
+---
+
+<section class="bg-terracotta py-16">
+  <div class="mx-auto max-w-3xl px-6 text-center">
+    <h2 class="font-serif text-3xl font-medium text-cream md:text-4xl">{block.headline}</h2>
+    {block.body && <p class="mt-4 text-lg text-blush-light">{block.body}</p>}
+    <a
+      href={block.buttonUrl}
+      class="mt-8 inline-flex items-center justify-center rounded-full bg-cream px-8 py-3 text-sm font-semibold uppercase tracking-wider text-terracotta hover:bg-oatmeal"
+    >
+      {block.buttonLabel}
+    </a>
+  </div>
+</section>

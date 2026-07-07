@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@theme {
+  /* Warm cream & oatmeal backgrounds */
+  --color-cream: #faf7f2;
+  --color-oatmeal: #f0ebe3;
+  --color-oatmeal-dark: #e5ddd2;
+
+  /* Peachy-blush & terracotta-rose accents */
+  --color-blush: #f4c4b0;
+  --color-blush-light: #fae8df;
+  --color-terracotta: #c4736b;
+  --color-terracotta-dark: #a85d55;
+  --color-rose: #d4897f;
+
+  /* Espresso / charcoal typography */
+  --color-espresso: #2c2416;
+  --color-charcoal: #3d3d3d;
+  --color-stone: #6b6560;
+
+  --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-sans: "DM Sans", system-ui, -apple-system, sans-serif;
+}
+
+@layer base {
+  html {
+    @apply scroll-smooth antialiased;
+  }
+
+  body {
+    @apply bg-cream text-espresso font-sans;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif text-espresso;
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-full bg-terracotta px-6 py-3 text-sm font-semibold uppercase tracking-wider text-cream shadow-sm hover:bg-terracotta-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center rounded-full border-2 border-terracotta bg-transparent px-6 py-3 text-sm font-semibold uppercase tracking-wider text-terracotta hover:bg-blush-light focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta;
+  }
+
+  .card {
+    @apply overflow-hidden rounded-2xl bg-oatmeal shadow-sm transition-shadow hover:shadow-md;
+  }
+
+  .section-title {
+    @apply font-serif text-3xl font-medium tracking-tight text-espresso md:text-4xl;
+  }
+
+  .section-subtitle {
+    @apply mt-2 text-lg text-stone;
+  }
+}

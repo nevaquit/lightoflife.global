@@ -1,0 +1,51 @@
+---
+import type { HomepageBlock } from '../lib/payload'
+import { getMediaUrl } from '../lib/payload'
+
+interface Props {
+  block: Extract<HomepageBlock, { blockType: 'featuredSermons' }>
+}
+
+const { block } = Astro.props
+const sermons = Array.isArray(block.sermons) ? block.sermons : []
+---
+
+<section class="bg-oatmeal py-20">
+  <div class="mx-auto max-w-7xl px-6">
+    <div class="mb-12 flex items-end justify-between">
+      <h2 class="section-title">{block.title}</h2>
+      <a href="/sermons" class="text-sm font-semibold uppercase tracking-wider text-terracotta hover:text-terracotta-dark">
+        View All &rarr;
+      </a>
+    </div>
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        sermons.map((sermon) => {
+          const thumbUrl = getMediaUrl(
+            typeof sermon.thumbnail === 'object' ? sermon.thumbnail : undefined,
+          )
+          return (
+            <a href={`/sermons/${sermon.slug}`} class="card group">
+              <div class="aspect-video overflow-hidden bg-oatmeal-dark">
+                {thumbUrl && (
+                  <img
+                    src={thumbUrl}
+                    alt={sermon.title}
+                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                )}
+              </div>
+              <div class="p-5">
+                <p class="text-xs font-semibold uppercase tracking-wider text-terracotta">
+                  {sermon.speaker}
+                </p>
+                <h3 class="mt-1 font-serif text-lg text-espresso">{sermon.title}</h3>
+              </div>
+            </a>
+          )
+        })
+      }
+    </div>
+  </div>
+</section>
