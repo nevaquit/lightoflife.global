@@ -1,12 +1,17 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
 import PageHero from '../components/PageHero.astro'
+import { absoluteUrl } from '../lib/config'
 import { site } from '../lib/site'
 
 const { contact } = site.pages
+const sent = Astro.url.searchParams.get('sent') === '1'
 ---
 
-<BaseLayout title="Contact — Light of Life Global" description="Get in touch with Light of Life Global.">
+<BaseLayout
+  title="Contact"
+  description="Get in touch with Light of Life Global — prayer requests, partnership, and visit questions welcome."
+>
   <PageHero title={contact.title} subtitle="We'd love to hear from you." />
 
   <section class="bg-cream py-16">
@@ -21,58 +26,76 @@ const { contact } = site.pages
             {contact.email}
           </a>
         </p>
+        <p class="mt-8 text-sm text-stone">
+          Prayer requests are treated privately. We will not publish your message without permission.
+        </p>
       </div>
 
-      <form
-        class="card space-y-5 p-8"
-        action="https://formsubmit.co/info@lightoflife.global"
-        method="POST"
-      >
-        <input type="hidden" name="_subject" value="Contact form — Light of Life Global" />
-        <input type="hidden" name="_captcha" value="false" />
-        <input type="hidden" name="_next" value="https://lightoflife-web.pages.dev/contact?sent=1" />
+      {
+        sent ? (
+          <div class="card space-y-4 p-8" role="status">
+            <h2 class="font-serif text-2xl text-espresso">Message received</h2>
+            <p class="text-stone">
+              Thank you for reaching out. Our team will respond as soon as we can.
+            </p>
+            <a href="/" class="btn-primary inline-flex">Return home</a>
+          </div>
+        ) : (
+          <form
+            class="card space-y-5 p-8"
+            action="https://formsubmit.co/info@lightoflife.global"
+            method="POST"
+          >
+            <input type="hidden" name="_subject" value="Contact form — Light of Life Global" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_next" value={absoluteUrl('/contact?sent=1')} />
+            <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off" />
 
-        <div>
-          <label for="name" class="mb-2 block text-sm font-medium text-charcoal">Your Name</label>
-          <input
-            id="name"
-            name="name"
-            type="text"
-            required
-            class="w-full rounded-xl border border-oatmeal-dark bg-white px-4 py-3 text-sm outline-none focus:border-terracotta"
-          />
-        </div>
-        <div>
-          <label for="email" class="mb-2 block text-sm font-medium text-charcoal">Your Email</label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            required
-            class="w-full rounded-xl border border-oatmeal-dark bg-white px-4 py-3 text-sm outline-none focus:border-terracotta"
-          />
-        </div>
-        <div>
-          <label for="subject" class="mb-2 block text-sm font-medium text-charcoal">Subject</label>
-          <input
-            id="subject"
-            name="subject"
-            type="text"
-            class="w-full rounded-xl border border-oatmeal-dark bg-white px-4 py-3 text-sm outline-none focus:border-terracotta"
-          />
-        </div>
-        <div>
-          <label for="message" class="mb-2 block text-sm font-medium text-charcoal">Message</label>
-          <textarea
-            id="message"
-            name="message"
-            rows="5"
-            required
-            class="w-full rounded-xl border border-oatmeal-dark bg-white px-4 py-3 text-sm outline-none focus:border-terracotta"
-          />
-        </div>
-        <button type="submit" class="btn-primary w-full">Send Message</button>
-      </form>
+            <div>
+              <label for="name" class="mb-2 block text-sm font-medium text-charcoal">Your Name</label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                required
+                autocomplete="name"
+                class="w-full rounded-xl border border-oatmeal-dark bg-white px-4 py-3 text-sm outline-none focus:border-terracotta"
+              />
+            </div>
+            <div>
+              <label for="email" class="mb-2 block text-sm font-medium text-charcoal">Your Email</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                required
+                autocomplete="email"
+                class="w-full rounded-xl border border-oatmeal-dark bg-white px-4 py-3 text-sm outline-none focus:border-terracotta"
+              />
+            </div>
+            <div>
+              <label for="subject" class="mb-2 block text-sm font-medium text-charcoal">Subject</label>
+              <input
+                id="subject"
+                name="subject"
+                type="text"
+                class="w-full rounded-xl border border-oatmeal-dark bg-white px-4 py-3 text-sm outline-none focus:border-terracotta"
+              />
+            </div>
+            <div>
+              <label for="message" class="mb-2 block text-sm font-medium text-charcoal">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                required
+                class="w-full rounded-xl border border-oatmeal-dark bg-white px-4 py-3 text-sm outline-none focus:border-terracotta"
+              />
+            </div>
+            <button type="submit" class="btn-primary w-full">Send Message</button>
+          </form>
+        )
+      }
     </div>
   </section>
 </BaseLayout>

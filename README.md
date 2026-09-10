@@ -24,6 +24,18 @@ pnpm migrate:import
 
 See [scripts/MIGRATION.md](scripts/MIGRATION.md) for full details. Legacy WordPress files are in `legacy/wordpress/`.
 
+## DNS cutover (nameservers → Cloudflare)
+
+`lightoflife.global` still resolves to Bluehost WordPress. The new stack is live at:
+
+- Frontend: https://lightoflife-web.pages.dev
+- CMS: https://lightoflife-cms.nevaquit.workers.dev
+
+**Copy this prompt into Claude Extension** (logged into Cloudflare + Bluehost):  
+[`scripts/CLAUDE-DNS-CUTOVER-PROMPT.md`](scripts/CLAUDE-DNS-CUTOVER-PROMPT.md)
+
+After NS flip: apex/`www` → Pages, `cms.` → Worker, preserve MX for email.
+
 ## Repository Layout
 
 ```

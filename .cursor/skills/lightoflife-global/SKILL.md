@@ -70,13 +70,15 @@ pnpm deploy:web
 
 ## DNS cutover (Bluehost → Cloudflare Pages)
 
-Domain NS currently: `ns1.bluehost.com`, `ns2.bluehost.com`.
+Domain NS currently still Bluehost (`ns1.bluehost.com` / `ns2.bluehost.com`). Public apex still serves WordPress on Apache.
 
-Pages custom domains added (pending CNAME):
-- `lightoflife.global` → `lightoflife-web.pages.dev`
-- `www.lightoflife.global` → `lightoflife-web.pages.dev`
+**Claude Extension prompt (copy/paste):** [`scripts/CLAUDE-DNS-CUTOVER-PROMPT.md`](../../../scripts/CLAUDE-DNS-CUTOVER-PROMPT.md)
 
-Suggested CMS subdomain after zone on Cloudflare: `cms.lightoflife.global` → Worker route.
+Target after cutover:
+- `lightoflife.global` / `www` → Pages `lightoflife-web`
+- `cms.lightoflife.global` → Worker `lightoflife-cms`
+- Preserve MX/TXT for email
+- Then set `PUBLIC_SITE_URL=https://lightoflife.global` and `PUBLIC_CMS_URL=https://cms.lightoflife.global`
 
 ## API patterns
 

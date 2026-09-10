@@ -2,3 +2,11 @@
 /prayer/   /prayers    301
 /donate    /causes     301
 /donate/   /causes     301
+/give      /causes     301
+/give/     /causes     301
+/sermon    /sermons    301
+/sermon/   /sermons    301
+/bulletin  /devotionals 301
+/bulletins /devotionals 301
+/wp-admin  /           302
+/wp-login.php /        302

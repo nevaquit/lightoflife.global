@@ -44,6 +44,7 @@ export default buildConfig({
   globals: [Homepage],
   cors: [
     process.env.PUBLIC_WEB_URL || 'http://localhost:4321',
+    'https://lightoflife-web.pages.dev',
     'https://lightoflife.global',
     'https://www.lightoflife.global',
   ],

@@ -7,3 +7,7 @@ pages_build_output_dir = "dist"
 
 [vars]
 PUBLIC_CMS_URL = "https://lightoflife-cms.nevaquit.workers.dev"
+# After DNS cutover, set both to production:
+# PUBLIC_SITE_URL = "https://lightoflife.global"
+# PUBLIC_CMS_URL = "https://cms.lightoflife.global"
+PUBLIC_SITE_URL = "https://lightoflife-web.pages.dev"

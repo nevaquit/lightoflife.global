@@ -28,7 +28,13 @@
   }
 
   body {
-    @apply bg-cream text-espresso font-sans;
+    @apply bg-cream text-espresso font-sans text-base leading-relaxed;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 
   h1,
