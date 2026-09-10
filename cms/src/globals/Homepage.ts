@@ -82,7 +82,6 @@ export const Homepage: GlobalConfig = {
                   name: 'image',
                   type: 'upload',
                   relationTo: 'media',
-                  required: true,
                 },
                 { name: 'title', type: 'text', required: true },
                 { name: 'url', type: 'text' },

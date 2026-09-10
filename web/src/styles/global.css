@@ -63,4 +63,71 @@
   .section-subtitle {
     @apply mt-2 text-lg text-stone;
   }
+
+  /* Document-style article body (Word-inspired hierarchy & spacing) */
+  .article-prose {
+    @apply max-w-none text-charcoal;
+    font-size: 1.0625rem;
+    line-height: 1.8;
+  }
+
+  .article-prose > *:first-child {
+    @apply mt-0;
+  }
+
+  .article-prose > p:first-of-type {
+    @apply text-lg leading-relaxed text-espresso;
+  }
+
+  .article-prose p {
+    @apply mb-5;
+  }
+
+  .article-prose h2 {
+    @apply mb-4 mt-10 font-serif text-2xl font-semibold text-espresso;
+  }
+
+  .article-prose h3 {
+    @apply mb-3 mt-8 font-serif text-xl font-semibold text-espresso;
+  }
+
+  .article-prose h4 {
+    @apply mb-2 mt-6 font-serif text-lg font-semibold text-espresso;
+  }
+
+  .article-prose strong {
+    @apply font-semibold text-espresso;
+  }
+
+  .article-prose em {
+    @apply italic text-charcoal;
+  }
+
+  .article-prose a {
+    @apply font-medium text-terracotta underline decoration-terracotta/40 underline-offset-2 hover:text-terracotta-dark hover:decoration-terracotta;
+  }
+
+  .article-prose blockquote {
+    @apply my-8 border-l-4 border-terracotta bg-blush-light/60 px-6 py-4 font-serif text-lg italic text-espresso;
+  }
+
+  .article-prose ul {
+    @apply my-6 list-disc space-y-2 pl-6;
+  }
+
+  .article-prose ol {
+    @apply my-6 list-decimal space-y-2 pl-6;
+  }
+
+  .article-prose li {
+    @apply pl-1;
+  }
+
+  .article-prose li > p {
+    @apply mb-2;
+  }
+
+  .article-prose hr {
+    @apply my-10 border-oatmeal-dark;
+  }
 }

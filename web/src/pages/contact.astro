@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import PageHero from '../components/PageHero.astro'
+import { site } from '../lib/site'
+
+const { contact } = site.pages
+---
+
+<BaseLayout title="Contact — Light of Life Global" description="Get in touch with Light of Life Global.">
+  <PageHero title={contact.title} subtitle="We'd love to hear from you." />
+
+  <section class="bg-cream py-16">
+    <div class="mx-auto grid max-w-5xl gap-12 px-6 lg:grid-cols-2">
+      <div>
+        <h2 class="font-serif text-2xl text-espresso">Send Us a Message</h2>
+        <p class="mt-4 text-stone">
+          Whether you have a prayer request, partnership inquiry, or general question — reach out and our team will respond.
+        </p>
+        <p class="mt-6">
+          <a href={`mailto:${contact.email}`} class="font-medium text-terracotta hover:text-terracotta-dark">
+            {contact.email}
+          </a>
+        </p>
+      </div>
+
+      <form
+        class="card space-y-5 p-8"
+        action="https://formsubmit.co/info@lightoflife.global"
+        method="POST"
+      >
+        <input type="hidden" name="_subject" value="Contact form — Light of Life Global" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_next" value="https://lightoflife-web.pages.dev/contact?sent=1" />
+
+        <div>
+          <label for="name" class="mb-2 block text-sm font-medium text-charcoal">Your Name</label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            required
+            class="w-full rounded-xl border border-oatmeal-dark bg-white px-4 py-3 text-sm outline-none focus:border-terracotta"
+          />
+        </div>
+        <div>
+          <label for="email" class="mb-2 block text-sm font-medium text-charcoal">Your Email</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            required
+            class="w-full rounded-xl border border-oatmeal-dark bg-white px-4 py-3 text-sm outline-none focus:border-terracotta"
+          />
+        </div>
+        <div>
+          <label for="subject" class="mb-2 block text-sm font-medium text-charcoal">Subject</label>
+          <input
+            id="subject"
+            name="subject"
+            type="text"
+            class="w-full rounded-xl border border-oatmeal-dark bg-white px-4 py-3 text-sm outline-none focus:border-terracotta"
+          />
+        </div>
+        <div>
+          <label for="message" class="mb-2 block text-sm font-medium text-charcoal">Message</label>
+          <textarea
+            id="message"
+            name="message"
+            rows="5"
+            required
+            class="w-full rounded-xl border border-oatmeal-dark bg-white px-4 py-3 text-sm outline-none focus:border-terracotta"
+          />
+        </div>
+        <button type="submit" class="btn-primary w-full">Send Message</button>
+      </form>
+    </div>
+  </section>
+</BaseLayout>

@@ -9,7 +9,15 @@
     "build:cms": "pnpm --filter @lightoflife/cms build",
     "build:web": "pnpm --filter @lightoflife/web build",
     "deploy:cms": "pnpm --filter @lightoflife/cms deploy",
-    "deploy:web": "pnpm --filter @lightoflife/web deploy"
+    "deploy:web": "pnpm --filter @lightoflife/web deploy",
+    "migrate:fetch": "node scripts/build-snapshot.mjs",
+    "migrate:import": "pnpm --filter @lightoflife/cms migrate:import",
+    "migrate:sync-media": "pnpm --filter @lightoflife/cms migrate:sync-media",
+    "migrate:backfill-r2": "pnpm --filter @lightoflife/cms migrate:backfill-r2",
+    "migrate:sync-devotional-media": "pnpm --filter @lightoflife/cms migrate:sync-devotional-media",
+    "migrate:media-map": "node scripts/build-cms-media-map.mjs",
+    "migrate:static-media": "pnpm --filter @lightoflife/cms migrate:sync-static-media",
+    "migrate:wordpress": "pnpm --filter @lightoflife/cms migrate:wordpress"
   },
   "engines": {
     "node": ">=20.0.0",

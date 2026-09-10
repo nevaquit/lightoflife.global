@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import DevotionalList from '../../components/DevotionalList.astro'
+import PageHero from '../../components/PageHero.astro'
+import { getDevotionals } from '../../lib/payload'
+
+const devotionals = (await getDevotionals(50)).filter((item) => item.type === 'bulletin')
+---
+
+<BaseLayout
+  title="Blog — Light of Life Global"
+  description="Weekly bulletins and articles from Light of Life Global."
+>
+  <PageHero
+    title="Blog"
+    subtitle="Weekly bulletins, biblical teaching, and ministry articles — formatted for thoughtful reading."
+  />
+  <section class="bg-cream py-16 md:py-20">
+    <div class="mx-auto max-w-6xl px-6">
+      <DevotionalList devotionals={devotionals} emptyMessage="No blog posts published yet." />
+    </div>
+  </section>
+</BaseLayout>

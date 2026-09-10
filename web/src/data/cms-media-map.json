@@ -1,0 +1,50 @@
+{
+  "sermons": {
+    "he-oul-can-be-heavy-sometimes": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/582773835_122105950473088173_3994075556825851544_n.jpg",
+    "his-yoke-is-easy-and-his-burden-is-light": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/yoke.jpg",
+    "god-knows-your-name": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/knows-your-name.jpg",
+    "the-danger-of-intimacy-outside-of-covenant": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/amnon.jpg",
+    "ruined-for-his-glory": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/ruined.jpg",
+    "he-wants-a-relationship-with-you": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/car.jpg",
+    "how-why-should-we-pray": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/Why-we-pray.png",
+    "man-says-show-me-and-i-will-trust-you-but-god-says-trust-me-and-i-will-show-you": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/Trust-2.png",
+    "the-gift-of-now-living-fully-in-gods-present": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/Sermon-of-the-gift-of-now.png",
+    "heaven-still-has-plans-when-you-think-its-over": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/Heaven_Still_Has_Plans_Visual_1024x584.png",
+    "youre-not-the-only-one-when-anxiety-lies": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/You_Are_Not_Alone_Cave_Image_1024x584.png",
+    "part-3-the-whisper-and-the-mission": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/ChatGPT-Image-Jul-10-2025-09_18_36-PM.png",
+    "part-2-bread-in-the-wilderness": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/ChatGPT-Image-Jul-5-2025-06_12_19-PM.png",
+    "part-1-the-fire-and-the-fear": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/Elijah-pic-for-blog.jpg",
+    "abounding-in-the-work-of-the-lord": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/church-man-sea.jpg",
+    "francis-chan-passion-2013-god-is-faithful": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/church-man-hope-1.jpg",
+    "all-my-inmost-being-praise-his-holy-name": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/church-man-hope.jpg"
+  },
+  "causes": {
+    "nourishing-bodies-nurturing-souls-a-meal-of-hope": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/a-large-communal-table-in-a-warm-inviting-setting.webp",
+    "cause-item": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/EMpowering-4.png",
+    "causes-item-tree": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/Faith-5.png",
+    "causes-item-two": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/church-man-hope-2.jpg"
+  },
+  "devotionals": {
+    "raising-children-in-gods-light-protecting-the-next-generation-biblically": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/raising-children-1.png",
+    "what-does-it-really-mean-to-be-a-christian-in-2025": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/really-mean-1.png",
+    "born-to-reign-you-are-the-head-and-not-the-tail": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/Born-3-1.png",
+    "lord-is-sufficient-for-all-of-our-needs": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/hunger-blog-1.webp",
+    "suspendisse-varius": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/life-pic-1.webp",
+    "perseverance-of-the-saints": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/church-man-sea1-1.jpg",
+    "prayer-for-healing": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/Prayer-for-healing-1.png",
+    "prayer-of-hope-and-illumination": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/Prayer-of-Hope-and-Illumination-1.png",
+    "prayers-for-the-people-of-mosul": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/Prayer-against-War-1.webp",
+    "a-prayer-for-peace-in-gaza": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/Marriage-prayer-1.webp",
+    "prayers-for-the-armed-forces": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/CHildren-image-2.webp",
+    "prayers-for-the-financial-situation-debt-and-redundancy": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/CHildren-image-3.webp"
+  },
+  "team": {
+    "antony-doe": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/Rutendo.jpg",
+    "marilyn-doe": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/HJ-Suit-pic.jpg"
+  },
+  "pillars": {
+    "devotional": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/raising-children-1.png",
+    "sermon": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/yoke.jpg",
+    "cause": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/a-large-communal-table-in-a-warm-inviting-setting.webp"
+  }
+}

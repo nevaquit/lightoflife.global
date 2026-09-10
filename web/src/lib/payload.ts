@@ -1,4 +1,16 @@
+import cmsMediaMap from '../data/cms-media-map.json'
+
 const CMS_URL = import.meta.env.PUBLIC_CMS_URL || 'http://localhost:3001'
+
+type MediaMap = {
+  sermons: Record<string, string>
+  causes: Record<string, string>
+  devotionals: Record<string, string>
+  team?: Record<string, string>
+  pillars?: Record<string, string>
+}
+
+const cmsImages = cmsMediaMap as MediaMap
 
 type PayloadResponse<T> = {
   docs: T[]
@@ -22,9 +34,11 @@ export type Sermon = {
   title: string
   slug: string
   speaker: string
+  content?: unknown
   videoUrl?: string
   audioUrl?: string
-  thumbnail: Media | string
+  thumbnail?: Media | string
+  externalImageUrl?: string
   publishDate: string
 }
 
@@ -32,8 +46,11 @@ export type Devotional = {
   id: string
   title: string
   slug: string
+  type?: 'bulletin' | 'prayer' | 'devotional'
   content: unknown
   scriptureReference?: string
+  thumbnail?: Media | string
+  externalImageUrl?: string
   publishDate: string
 }
 
@@ -42,7 +59,8 @@ export type Cause = {
   title: string
   slug: string
   description: unknown
-  image: Media | string
+  image?: Media | string
+  externalImageUrl?: string
   donationGoal: number
   currentRaised: number
 }
@@ -93,7 +111,8 @@ export type Homepage = {
 async function fetchPayload<T>(path: string): Promise<T> {
   const res = await fetch(`${CMS_URL}/api${path}`, {
     headers: { 'Content-Type': 'application/json' },
-  })
+    cf: { cacheTtl: 60, cacheEverything: true },
+  } as RequestInit)
 
   if (!res.ok) {
     throw new Error(`Payload API error: ${res.status} ${res.statusText}`)
@@ -107,6 +126,33 @@ export function getMediaUrl(media: Media | string | undefined): string | undefin
   if (typeof media === 'string') return undefined
   if (media.url) return media.url.startsWith('http') ? media.url : `${CMS_URL}${media.url}`
   return undefined
+}
+
+export function getSermonImage(sermon: Sermon): string | undefined {
+  return (
+    getMediaUrl(typeof sermon.thumbnail === 'object' ? sermon.thumbnail : undefined) ||
+    cmsImages.sermons[sermon.slug]
+  )
+}
+
+/** Text-heavy sermon art (PNG) needs contain-fit; photos keep portrait cover crop. */
+export function getSermonThumbVariant(imageUrl?: string | null): 'sermon' | 'graphic' {
+  if (!imageUrl) return 'sermon'
+  return /\.png$/i.test(imageUrl.split('?')[0] ?? '') ? 'graphic' : 'sermon'
+}
+
+export function getCauseImage(cause: Cause): string | undefined {
+  return (
+    getMediaUrl(typeof cause.image === 'object' ? cause.image : undefined) ||
+    cmsImages.causes[cause.slug]
+  )
+}
+
+export function getDevotionalImage(devotional: Devotional): string | undefined {
+  return (
+    getMediaUrl(typeof devotional.thumbnail === 'object' ? devotional.thumbnail : undefined) ||
+    cmsImages.devotionals[devotional.slug]
+  )
 }
 
 export async function getHomepage(): Promise<Homepage> {

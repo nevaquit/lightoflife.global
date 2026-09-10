@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import ContentImage from '../components/ContentImage.astro'
+import PageHero from '../components/PageHero.astro'
+import { site } from '../lib/site'
+
+const { team } = site
+---
+
+<BaseLayout title="Staff — Light of Life Global" description="Meet the leadership team of Light of Life Global.">
+  <PageHero title="Staff" subtitle="Leaders committed to spreading the light of Christ globally." />
+
+  <section class="bg-cream py-16">
+    <div class="mx-auto grid max-w-5xl gap-10 px-6 md:grid-cols-2">
+      {
+        team.map((member) => (
+          <article class="card overflow-hidden">
+            <ContentImage src={member.imageUrl} alt={member.name} variant="portrait" />
+            <div class="p-6">
+              <h2 class="font-serif text-2xl text-espresso">{member.name}</h2>
+              <div class="mt-4 space-y-4 text-stone leading-relaxed">
+                {member.bio.split(/\n{2,}/).map((p) => (
+                  <p>{p}</p>
+                ))}
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

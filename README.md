@@ -2,15 +2,37 @@
 
 Edge-native, headless website for [lightoflife.global](https://lightoflife.global) — Payload CMS v3 on Cloudflare Workers, Astro frontend on Cloudflare Pages.
 
+## WordPress Migration
+
+Content was migrated from the legacy WordPress site (Ninetheme Church theme):
+
+| WordPress | Payload |
+|---|---|
+| `sermon` CPT (17 items) | `sermons` |
+| `posts` bulletins (6 items) | `devotionals` (type: bulletin) |
+| `prayers` CPT (6 items) | `devotionals` (type: prayer) |
+| `causes` CPT (4 items) | `causes` |
+| Hero mu-plugin | `homepage` global |
+
+```bash
+# Fetch latest from live WordPress
+pnpm migrate:fetch
+
+# Import snapshot into Payload (requires CMS running locally)
+pnpm migrate:import
+```
+
+See [scripts/MIGRATION.md](scripts/MIGRATION.md) for full details. Legacy WordPress files are in `legacy/wordpress/`.
+
 ## Repository Layout
 
 ```
 lightoflife.global/
-├── cms/              # Payload CMS v3 → Cloudflare Workers (D1 + R2)
-├── web/              # Astro SSR → Cloudflare Pages
-├── wp-admin/         # Legacy WordPress (pre-migration, to be retired)
-├── wp-content/       # Legacy WordPress themes, plugins, uploads
-└── package.json      # Monorepo root
+├── cms/                  # Payload CMS v3 → Cloudflare Workers (D1 + R2)
+├── web/                  # Astro SSR → Cloudflare Pages
+├── scripts/              # Migration tooling + WP snapshot data
+├── legacy/wordpress/     # Archived WordPress installation
+└── package.json          # Monorepo root
 ```
 
 ## Architecture
@@ -110,23 +132,33 @@ pnpm dev:web
 - **Frontend:** http://localhost:4321
 - **REST API:** http://localhost:3001/api/sermons
 
-## Deployment
+## Deployment (Linux / CI required for CMS)
 
-### Deploy CMS (Cloudflare Workers)
+CMS deploy uses OpenNext on Cloudflare Workers. **Windows builds work** with the WASM patch script, but Linux CI is recommended for production.
 
 ```bash
-cd cms
+# From cms/ — uses patch-fs-wasm.mjs automatically
+npm run deploy
 
-# Set production secret (one-time)
-npx wrangler secret put PAYLOAD_SECRET
-
-# Update wrangler.toml with your D1 database_id
-
-# Deploy database migrations + worker
-pnpm deploy
+# Or manually:
+node --import ./scripts/patch-fs-wasm.mjs ./node_modules/@opennextjs/cloudflare/dist/cli/index.js build
+node --import ./scripts/patch-fs-wasm.mjs ./node_modules/@opennextjs/cloudflare/dist/cli/index.js deploy
 ```
 
-Your CMS will be live at `https://lightoflife-cms.<your-subdomain>.workers.dev`.
+### GitHub Actions secrets required
+
+| Secret | Purpose |
+|--------|---------|
+| `CLOUDFLARE_API_TOKEN` | Workers + Pages deploy |
+| `CLOUDFLARE_ACCOUNT_ID` | `365965a7234fe266200abe63be3b63ba` |
+| `PAYLOAD_SECRET` | Payload auth (same as cms/.env) |
+
+Trigger: push to `main` or workflow_dispatch on `.github/workflows/deploy-cloudflare.yml`.
+
+### Critical: `NEXT_PRIVATE_MINIMAL_MODE=1`
+
+Set in `cms/wrangler.toml` — prevents `Dynamic require of middleware-manifest.json` 500 errors on Workers.
+
 
 ### Deploy Frontend (Cloudflare Pages)
 
@@ -189,7 +221,7 @@ curl "https://your-cms.workers.dev/api/devotionals?where[slug][equals]=daily-bre
 2. Configure the Homepage global with Hero + Media Grid blocks
 3. Add sermon, devotional, and cause content
 4. Point `lightoflife.global` DNS to Cloudflare Pages
-5. Add Lexical rich-text serializer to devotional detail pages
+5. ~~Add Lexical rich-text serializer to devotional detail pages~~ ✅ Done
 6. Integrate a donation provider (Stripe, PayPal) on cause pages
 
 ## License

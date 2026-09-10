@@ -1,0 +1,74 @@
+---
+interface Props {
+  src?: string | null
+  alt: string
+  variant?: 'sermon' | 'cause' | 'portrait' | 'landscape' | 'card' | 'graphic'
+  class?: string
+  imageClass?: string
+}
+
+const { src, alt, variant = 'card', class: className = '', imageClass = '' } = Astro.props
+
+const aspectClasses: Record<NonNullable<Props['variant']>, string> = {
+  sermon: 'aspect-[3/4]',
+  cause: 'aspect-[16/10]',
+  portrait: 'aspect-[4/5]',
+  landscape: 'aspect-[16/9]',
+  card: 'aspect-[4/3]',
+  graphic: 'aspect-[4/3]',
+}
+
+const objectClasses: Record<NonNullable<Props['variant']>, string> = {
+  sermon: 'object-cover object-top',
+  cause: 'object-cover object-center',
+  portrait: 'object-cover object-top',
+  landscape: 'object-cover object-center',
+  card: 'object-cover object-center',
+  graphic: 'object-contain object-center p-4',
+}
+
+const containerClasses: Record<NonNullable<Props['variant']>, string> = {
+  sermon: 'bg-oatmeal-dark',
+  cause: 'bg-oatmeal-dark',
+  portrait: 'bg-oatmeal-dark',
+  landscape: 'bg-oatmeal-dark',
+  card: 'bg-oatmeal-dark',
+  graphic: 'bg-cream',
+}
+
+const isGraphic = variant === 'graphic'
+---
+
+<div
+  class:list={[
+    'overflow-hidden',
+    containerClasses[variant],
+    isGraphic ? 'flex items-center justify-center' : '',
+    aspectClasses[variant],
+    className,
+  ]}
+>
+  {
+    src ? (
+      <img
+        src={src}
+        alt={alt}
+        class:list={[
+          isGraphic
+            ? 'max-h-full max-w-full object-contain p-4'
+            : 'h-full w-full object-cover transition-transform duration-300 group-hover:scale-105',
+          !isGraphic && objectClasses[variant],
+          imageClass,
+        ]}
+        loading="lazy"
+        decoding="async"
+        width="800"
+        height="600"
+      />
+    ) : (
+      <div class="flex h-full w-full items-center justify-center bg-gradient-to-br from-oatmeal-dark to-oatmeal">
+        <span class="px-4 text-center font-serif text-sm text-stone">{alt}</span>
+      </div>
+    )
+  }
+</div>

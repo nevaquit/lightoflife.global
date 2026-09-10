@@ -1,0 +1,34 @@
+---
+import { site } from '../lib/site'
+
+interface Props {
+  class?: string
+}
+
+const { class: className = '' } = Astro.props
+const { newsletter } = site.footer
+---
+
+<div class:list={['rounded-2xl bg-cream p-6', className]}>
+  <h3 class="font-serif text-lg text-espresso">{newsletter.title}</h3>
+  <p class="mt-2 text-sm text-stone">{newsletter.description}</p>
+  <form
+    class="mt-4 flex flex-col gap-3 sm:flex-row"
+    action="https://formsubmit.co/info@lightoflife.global"
+    method="POST"
+  >
+    <input type="hidden" name="_subject" value="Newsletter subscription — Light of Life Global" />
+    <input type="hidden" name="_captcha" value="false" />
+    <input type="hidden" name="_next" value="https://lightoflife-web.pages.dev/?subscribed=1" />
+    <label class="sr-only" for="newsletter-email">Email address</label>
+    <input
+      id="newsletter-email"
+      type="email"
+      name="email"
+      required
+      placeholder="Enter email"
+      class="flex-1 rounded-full border border-oatmeal-dark bg-white px-4 py-3 text-sm text-espresso outline-none focus:border-terracotta"
+    />
+    <button type="submit" class="btn-primary whitespace-nowrap">Subscribe Now →</button>
+  </form>
+</div>

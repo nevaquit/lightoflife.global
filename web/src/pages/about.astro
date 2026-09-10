@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import PageHero from '../components/PageHero.astro'
+import { site } from '../lib/site'
+
+const { about } = site.pages
+
+function renderSections(sections: string[]) {
+  const elements: Array<{ type: 'h2' | 'p' | 'li'; text: string }> = []
+
+  for (const block of sections) {
+    const lines = block.split('\n').map((l) => l.trim()).filter(Boolean)
+    for (const line of lines) {
+      const cleaned = line.replace(/\\n/g, '').trim()
+      if (!cleaned) continue
+      if (/^(Our Story|Our Mission|Our Vision|Leadership|What We Offer|Join Us)/.test(cleaned)) {
+        elements.push({ type: 'h2', text: cleaned })
+      } else if (cleaned.startsWith('Hosting ') || cleaned.match(/^(Sharing|Serving|Using) /)) {
+        elements.push({ type: 'li', text: cleaned })
+      } else {
+        elements.push({ type: 'p', text: cleaned })
+      }
+    }
+  }
+
+  return elements
+}
+
+const content = renderSections(about.sections)
+---
+
+<BaseLayout title={`${about.title} — Light of Life Global`} description="Learn about Light of Life Global's mission, vision, and story.">
+  <PageHero title={about.title} subtitle="One Light · One Truth · One Global Mission" />
+
+  <section class="bg-cream py-16">
+    <div class="mx-auto max-w-3xl px-6 text-charcoal">
+      {
+        (() => {
+          const nodes: unknown[] = []
+          let listItems: string[] = []
+
+          const flushList = () => {
+            if (listItems.length) {
+              nodes.push(
+                <ul class="my-4 list-disc space-y-2 pl-6">
+                  {listItems.map((text) => (
+                    <li>{text}</li>
+                  ))}
+                </ul>,
+              )
+              listItems = []
+            }
+          }
+
+          for (const item of content) {
+            if (item.type === 'li') {
+              listItems.push(item.text)
+              continue
+            }
+            flushList()
+            if (item.type === 'h2') {
+              nodes.push(<h2 class="mt-8 font-serif text-2xl text-espresso">{item.text}</h2>)
+            } else {
+              nodes.push(<p class="mt-4 leading-relaxed text-stone">{item.text}</p>)
+            }
+          }
+          flushList()
+          return nodes
+        })()
+      }
+    </div>
+  </section>
+</BaseLayout>

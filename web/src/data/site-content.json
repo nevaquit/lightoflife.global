@@ -1,0 +1,190 @@
+{
+  "fetchedAt": "2026-07-09T00:57:48.711Z",
+  "source": "https://lightoflife.global",
+  "navigation": [
+    {
+      "label": "Home",
+      "href": "/"
+    },
+    {
+      "label": "About",
+      "href": "/about",
+      "children": [
+        {
+          "label": "Staff",
+          "href": "/staff"
+        },
+        {
+          "label": "FAQ",
+          "href": "/faq"
+        }
+      ]
+    },
+    {
+      "label": "Sermons",
+      "href": "/sermons"
+    },
+    {
+      "label": "Blog",
+      "href": "/blog"
+    },
+    {
+      "label": "Podcast",
+      "href": "/podcast"
+    }
+  ],
+  "footer": {
+    "tagline": "One Light. One Truth. One Global Mission. Join our growing community.",
+    "aboutText": "Light of Life Global is an online ministry dedicated to spreading the transformative light of Christ through worship, teaching, and global outreach.",
+    "quickLinks": [
+      {
+        "label": "About Us",
+        "href": "/about"
+      },
+      {
+        "label": "Sermons",
+        "href": "/sermons"
+      },
+      {
+        "label": "Blog",
+        "href": "/blog"
+      },
+      {
+        "label": "Podcast",
+        "href": "/podcast"
+      },
+      {
+        "label": "Ministry",
+        "href": "/ministry"
+      },
+      {
+        "label": "Prayers",
+        "href": "/prayers"
+      },
+      {
+        "label": "FAQ",
+        "href": "/faq"
+      },
+      {
+        "label": "Contact Us",
+        "href": "/contact"
+      }
+    ],
+    "social": [
+      {
+        "label": "X (Twitter)",
+        "href": "https://x.com/Lightoflifeonx"
+      }
+    ],
+    "newsletter": {
+      "title": "Subscribe to Our Newsletter",
+      "description": "Receive weekly bulletins, sermon updates, and ministry news."
+    }
+  },
+  "pillarImages": {
+    "devotional": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/raising-children-1.png",
+    "sermon": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/yoke.jpg",
+    "cause": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/a-large-communal-table-in-a-warm-inviting-setting.webp"
+  },
+  "podcast": {
+    "title": "Light Of Life with R.Jenkins",
+    "subtitle": "Faith, purpose, and healing through biblical truth and honest conversation.",
+    "embedUrl": "https://www.buzzsprout.com/2598948?client_source=large_player&iframe=true&player=large",
+    "platforms": [
+      {
+        "url": "https://podcasts.apple.com/podcast/id",
+        "label": "Apple Podcasts"
+      },
+      {
+        "url": "https://open.spotify.com/show/",
+        "label": "Spotify"
+      },
+      {
+        "url": "https://music.amazon.com/podcasts/",
+        "label": "Amazon Music"
+      }
+    ]
+  },
+  "faq": [
+    {
+      "question": "1. What is The Light of Life?",
+      "answer": "The Light of Life is an online ministry and talk show dedicated to spreading the transformative light of Christ through worship, impactful conversations, and community outreach. Our mission is to inspire, educate, and guide individuals into a closer relationship with Jesus Christ."
+    },
+    {
+      "question": "2. How can I participate in the online worship services?",
+      "answer": "Our weekly virtual worship services are streamed live on our website and social media platforms. To join, simply visit Lightoflife.global during the scheduled service times. You can also access past services in our archives for viewing at your convenience."
+    },
+    {
+      "question": "3. What topics are covered in the talk show episodes?",
+      "answer": "The Light of Life talk show features interviews, testimonies, and teachings that address real-world challenges through a biblical lens. Episodes cover a range of topics, including faith, family, mental health, and personal growth, aiming to provide practical and spiritual guidance."
+    },
+    {
+      "question": "4. How can I get involved in community outreach programs?",
+      "answer": "We offer various virtual and local community outreach programs, such as youth mentorship, mental health support groups, and partnerships with charities for poverty alleviation. To get involved, please visit our Community Outreach page for more information and volunteer opportunities."
+    },
+    {
+      "question": "5. Is there a way to support The Light of Life financially?",
+      "answer": "Yes, The Light of Life operates through the generous support of individuals and organizations. You can contribute by making a donation, sponsoring specific programs, or purchasing merchandise from our online store. Visit our Support Us page to learn more about how you can help sustain our ministry."
+    },
+    {
+      "question": "6. Who leads The Light of Life ministry?",
+      "answer": "The ministry is led by Rutendo Jenkins, who serves as the Host and Ministry Leader. With a passion for sharing the Gospel and a heart for service, Rutendo guides the vision and direction of The Light of Life, ensuring that all initiatives align with our mission to spread the light of Christ."
+    },
+    {
+      "question": "7. How can I stay updated on upcoming events and new content?",
+      "answer": "To stay informed about our latest events, episodes, and initiatives, you can subscribe to our newsletter by entering your email at the bottom of our homepage. Additionally, follow us on our social media channels for real-time updates and inspirational content."
+    },
+    {
+      "question": "8. Are there opportunities to collaborate with The Light of Life?",
+      "answer": "We welcome collaborations with Christian musicians, authors, speakers, and organizations that share our mission. If you’re interested in partnering with us, please reach out through our Contact Us page, and we’ll be happy to discuss potential opportunities."
+    },
+    {
+      "question": "9. How can I access the musical content featured in the services and talk shows?",
+      "answer": "Our musical performances, including live worship sessions and special episodes, are available on our website and YouTube channel. We also curate exclusive worship playlists and collaborate with Christian artists to provide uplifting music that connects you to God."
+    },
+    {
+      "question": "10. What measures are in place to ensure the quality of the online content?",
+      "answer": "We have a dedicated Media Team responsible for the production and distribution of our content. This team includes video editors, graphic designers, and social media strategists who work together to maintain a high-quality digital presence that reflects the excellence and integrity of our ministry."
+    }
+  ],
+  "pages": {
+    "about": {
+      "title": "About",
+      "sections": [
+        "Welcome to The Light of Life – an online ministry and talk show dedicated to spreading the transformative light of Christ to a global audience. Rooted in John 8:12, where Jesus declares, “I am the light of the world. Whoever follows me will never walk in darkness but will have the light of life,” our mission is to guide individuals into a closer relationship with Christ through worship, impactful conversations, and meaningful community outreach.",
+        "Our Story\nThe Light of Life was founded with a vision to create a space where people from all walks of life can come together, united in faith and inspired by the message of Jesus Christ. Our ministry began as a heartfelt desire to bring the Gospel to the digital world—reaching beyond church walls to inspire, uplift, and empower a diverse global community.",
+        "Our Mission\nWe exist to spread the light of Christ by:\\n",
+        "Hosting engaging worship experiences that connect people to God.\\n",
+        "Sharing real-life stories of transformation and hope through our online talk show.\\n",
+        "Serving communities through virtual mentorship, mental health support, and practical outreach initiatives.\\n",
+        "Using the power of music to uplift and inspire faith in every heart.",
+        "Our Vision\nTo be a global beacon of spiritual illumination, uniting people across cultures and generations under the truth and love of Jesus Christ.",
+        "Leadership\nAt the helm of our ministry is Rutendo Jenkins, our visionary host and ministry leader. With a heart for service and a passion for sharing the Gospel, Rutendo has dedicated her life to leading others toward the light of Christ. Supported by a talented and committed team of pastors, musicians, and ministry professionals, Rutendo strives to ensure that every message, song, and outreach effort reflects the love and truth of God’s Word.",
+        "What We Offer\nThrough weekly worship services, heartfelt musical performances, and compelling conversations on our talk show, we create opportunities for people to encounter the presence of God in their everyday lives. Our programs also include Bible studies, leadership development, and outreach projects designed to meet both spiritual and practical needs.",
+        "Join Us\nWhether you are seeking to deepen your faith, connect with a vibrant community, or find hope and inspiration, The Light of Life is here for you. Together, let us walk in the light of Christ and bring His message of love, grace, and redemption to the world."
+      ]
+    },
+    "ministry": {
+      "title": "Ministry",
+      "sections": []
+    },
+    "contact": {
+      "title": "Contact",
+      "email": "info@lightoflife.global"
+    }
+  },
+  "team": [
+    {
+      "name": "Rutendo Jenkins",
+      "slug": "antony-doe",
+      "bio": "Rutendo leads “The Light of Life,” an online ministry and talk show dedicated to spreading the transformative light of Christ to a global audience. Her leadership reflects a deep commitment to guiding individuals into a closer relationship with Christ through worship, impactful conversations, and meaningful community outreach.\n\nRutendo Jenkins continues to inspire and lead with a vision rooted in faith, service, and the pursuit of knowledge, making a significant impact in both her professional field and the communities she serves.",
+      "imageUrl": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/Rutendo.jpg"
+    },
+    {
+      "name": "Henry Jenkins",
+      "slug": "marilyn-doe",
+      "bio": "Henry is a devoted follower of Christ, a loving husband to Rutendo, and a key member of Light of Life Global Ministries. From a young age, Henry sensed a calling to serve God’s Kingdom and has dedicated his life to discipleship, community-building, and spreading the Gospel of Jesus Christ. Guided by John 8:12—“I am the light of the world: he that followeth me shall not walk in darkness, but shall have the light of life”—Henry lives each day with a passion to help others experience the transformative power of God’s Word.\n\nInvolvement in Light of Life Global Ministries\n\nAlongside his wife, Rutendo (the visionary host and certified theologian), Henry plays a pivotal behind-the-scenes role in shaping the ministry’s outreach and operations. He offers both spiritual and practical support to further the mission of Light of Life Global—proclaiming biblical truth and bringing hope to audiences across the globe. Whether coordinating resources for their online shows, helping organize worship and teaching segments, or collaborating with the production team, Henry’s commitment to excellence and genuine servant’s heart shine through.",
+      "imageUrl": "https://lightoflife-cms.nevaquit.workers.dev/api/media/file/HJ-Suit-pic.jpg"
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+---
+import { getSermons } from '../lib/payload'
+import { site } from '../lib/site'
+import NewsletterSignup from './NewsletterSignup.astro'
+
+const latestSermons = await getSermons(5)
+const { footer } = site
+---
+
+<footer class="border-t border-oatmeal-dark/50 bg-oatmeal">
+  <div class="mx-auto max-w-7xl px-6 py-16">
+    <div class="grid gap-12 lg:grid-cols-4">
+      <div class="lg:col-span-2">
+        <h2 class="font-serif text-xl text-espresso">About the Church</h2>
+        <p class="mt-4 text-sm leading-relaxed text-stone">{footer.aboutText}</p>
+        <NewsletterSignup class="mt-8" />
+      </div>
+
+      <div>
+        <h2 class="font-serif text-xl text-espresso">Quick Links</h2>
+        <ul class="mt-4 space-y-2">
+          {
+            footer.quickLinks.map((link) => (
+              <li>
+                <a href={link.href} class="text-sm text-stone hover:text-terracotta">
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="font-serif text-xl text-espresso">Latest Sermons</h2>
+        <ul class="mt-4 space-y-3">
+          {
+            latestSermons.map((sermon) => (
+              <li>
+                <a href={`/sermons/${sermon.slug}`} class="group block">
+                  <span class="text-sm text-charcoal group-hover:text-terracotta">
+                    {sermon.title.replace(/[\u{1F300}-\u{1FAFF}\u{1F000}-\u{1F9FF}]/gu, '').trim()}
+                  </span>
+                  <time class="mt-0.5 block text-xs text-stone" datetime={sermon.publishDate}>
+                    {new Date(sermon.publishDate).toLocaleDateString('en-US', {
+                      month: 'short',
+                      day: 'numeric',
+                      year: 'numeric',
+                    })}
+                  </time>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-12 flex flex-col items-center justify-between gap-6 border-t border-oatmeal-dark/50 pt-8 md:flex-row">
+      <div class="text-center md:text-left">
+        <img
+          src="/images/logo.png"
+          alt="Light of Life Global"
+          width="175"
+          height="55"
+          class="mx-auto h-10 w-auto max-w-[160px] object-contain md:mx-0"
+        />
+        <p class="mt-2 text-sm text-stone">{footer.tagline}</p>
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        {
+          footer.social.map((link) => (
+            <a
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-sm font-medium text-terracotta hover:text-terracotta-dark"
+            >
+              {link.label}
+            </a>
+          ))
+        }
+        <a href="/contact" class="text-sm font-medium text-stone hover:text-terracotta">
+          Send Us a Message
+        </a>
+      </div>
+    </div>
+
+    <p class="mt-8 text-center text-xs text-stone">
+      &copy; {new Date().getFullYear()} Light of Life Global. All rights reserved.
+    </p>
+  </div>
+</footer>

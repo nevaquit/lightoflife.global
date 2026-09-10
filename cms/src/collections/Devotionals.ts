@@ -18,6 +18,16 @@ export const Devotionals: CollectionConfig = {
     },
     slugField({ fieldToUse: 'title' }),
     {
+      name: 'type',
+      type: 'select',
+      defaultValue: 'bulletin',
+      options: [
+        { label: 'Weekly Bulletin', value: 'bulletin' },
+        { label: 'Prayer', value: 'prayer' },
+        { label: 'Devotional', value: 'devotional' },
+      ],
+    },
+    {
       name: 'content',
       type: 'richText',
       required: true,
@@ -31,6 +41,19 @@ export const Devotionals: CollectionConfig = {
       },
     },
     {
+      name: 'thumbnail',
+      type: 'upload',
+      relationTo: 'media',
+    },
+    {
+      name: 'externalImageUrl',
+      type: 'text',
+      label: 'External Image URL',
+      admin: {
+        description: 'Fallback image URL during migration from WordPress',
+      },
+    },
+    {
       name: 'publishDate',
       type: 'date',
       required: true,
@@ -39,6 +62,12 @@ export const Devotionals: CollectionConfig = {
           pickerAppearance: 'dayAndTime',
         },
       },
+    },
+    {
+      name: 'legacyWordPressId',
+      type: 'number',
+      index: true,
+      admin: { readOnly: true, position: 'sidebar' },
     },
   ],
 }

@@ -3,6 +3,7 @@
 
 name = "lightoflife-cms"
 main = ".open-next/worker.js"
+find_additional_modules = true
 compatibility_date = "2026-07-07"
 compatibility_flags = ["nodejs_compat", "global_fetch_strictly_public"]
 
@@ -13,12 +14,15 @@ binding = "ASSETS"
 [[d1_databases]]
 binding = "D1"
 database_name = "lightoflife-cms"
-database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+database_id = "a34c497a-e72b-4517-bb12-77c01c146315"
 remote = true
 
 [[r2_buckets]]
 binding = "R2"
 bucket_name = "lightoflife-media"
+remote = true
 
 [vars]
 # Set PAYLOAD_SECRET via: wrangler secret put PAYLOAD_SECRET
+# Skip dynamic require() of middleware-manifest.json (not supported on Workers)
+NEXT_PRIVATE_MINIMAL_MODE = "1"

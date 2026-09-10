@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import FaqList from '../components/FaqList.astro'
+import PageHero from '../components/PageHero.astro'
+import { site } from '../lib/site'
+---
+
+<BaseLayout title="FAQ — Light of Life Global" description="Frequently asked questions about Light of Life Global ministry.">
+  <PageHero title="FAQ" subtitle="Answers to common questions about our ministry and community." />
+
+  <section class="bg-cream py-16">
+    <div class="mx-auto max-w-3xl px-6">
+      <FaqList items={site.faq} />
+    </div>
+  </section>
+</BaseLayout>

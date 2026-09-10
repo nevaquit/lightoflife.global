@@ -1,0 +1,33 @@
+---
+import type { Devotional } from '../lib/payload'
+import BlogCard from './BlogCard.astro'
+
+interface Props {
+  devotionals: Devotional[]
+  title?: string
+}
+
+const { devotionals, title = 'Latest Bulletin' } = Astro.props
+---
+
+<section class="bg-cream py-20">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="mb-12 flex items-end justify-between">
+      <div>
+        <h2 class="section-title">{title}</h2>
+        <p class="section-subtitle mt-2">Weekly readings and ministry updates</p>
+      </div>
+      <a
+        href="/blog"
+        class="text-sm font-semibold uppercase tracking-wider text-terracotta hover:text-terracotta-dark"
+      >
+        View All &rarr;
+      </a>
+    </div>
+    <div class="grid gap-8 md:grid-cols-2">
+      {devotionals.map((devotional) => (
+        <BlogCard devotional={devotional} />
+      ))}
+    </div>
+  </div>
+</section>

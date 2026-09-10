@@ -1,0 +1,17 @@
+drwxr-xr-x   14 xgmztfmy   xgmztfmy         4096 Apr  8 19:28 .
+drwxr-xr-x    7 xgmztfmy   xgmztfmy         4096 Apr  7 21:53 ..
+-rw-r--r--    1 xgmztfmy   xgmztfmy       596832 Jun  1  2025 db-202506011243.sql
+-rw-r--r--    1 xgmztfmy   xgmztfmy           28 Jan 20  2025 index.php
+drwxr-xr-x    2 xgmztfmy   xgmztfmy         4096 Jun  1  2025 instawpbackups
+drwxr-xr-x    3 xgmztfmy   xgmztfmy         4096 Jun  1  2025 jetpack-waf
+drwxr-xr-x    2 xgmztfmy   xgmztfmy         4096 Jun  1  2025 mu-plugins
+drwxr-xr-x    2 xgmztfmy   xgmztfmy         4096 Jun  1  2025 mu-plugins-202506011243
+drwxr-xr-x   25 xgmztfmy   xgmztfmy         4096 Apr  7 13:12 plugins
+drwxr-xr-x   11 xgmztfmy   xgmztfmy         4096 Jun  1  2025 plugins-202506011243
+-rw-r--r--    1 xgmztfmy   xgmztfmy           77 Jan 20  2025 sgs_encrypt_key.php
+drwxr-xr-x    7 xgmztfmy   xgmztfmy         4096 Jun  1  2025 themes
+drwxr-xr-x    5 xgmztfmy   xgmztfmy         4096 Jun  1  2025 themes-202506011243
+drwxr-xr-x    3 xgmztfmy   xgmztfmy         4096 Sep 13  2025 updraft
+drwxr-xr-x    2 xgmztfmy   xgmztfmy         4096 Apr  7 13:12 upgrade
+drwxr-xr-x    2 xgmztfmy   xgmztfmy         4096 Aug 10  2025 upgrade-temp-backup
+drwxr-xr-x   13 xgmztfmy   xgmztfmy         4096 Dec 31 17:00 uploads

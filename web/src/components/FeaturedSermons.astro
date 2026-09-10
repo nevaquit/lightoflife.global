@@ -1,6 +1,7 @@
 ---
 import type { HomepageBlock } from '../lib/payload'
-import { getMediaUrl } from '../lib/payload'
+import { getSermonImage } from '../lib/payload'
+import ContentImage from './ContentImage.astro'
 
 interface Props {
   block: Extract<HomepageBlock, { blockType: 'featuredSermons' }>
@@ -21,21 +22,10 @@ const sermons = Array.isArray(block.sermons) ? block.sermons : []
     <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
       {
         sermons.map((sermon) => {
-          const thumbUrl = getMediaUrl(
-            typeof sermon.thumbnail === 'object' ? sermon.thumbnail : undefined,
-          )
+          const thumbUrl = getSermonImage(sermon)
           return (
             <a href={`/sermons/${sermon.slug}`} class="card group">
-              <div class="aspect-video overflow-hidden bg-oatmeal-dark">
-                {thumbUrl && (
-                  <img
-                    src={thumbUrl}
-                    alt={sermon.title}
-                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                )}
-              </div>
+              <ContentImage src={thumbUrl} alt={sermon.title} variant="sermon" />
               <div class="p-5">
                 <p class="text-xs font-semibold uppercase tracking-wider text-terracotta">
                   {sermon.speaker}

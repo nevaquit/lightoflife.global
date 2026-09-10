@@ -26,13 +26,12 @@ export const Causes: CollectionConfig = {
       name: 'image',
       type: 'upload',
       relationTo: 'media',
-      required: true,
     },
     {
       name: 'donationGoal',
       type: 'number',
-      required: true,
       min: 0,
+      defaultValue: 0,
       admin: {
         description: 'Target fundraising amount in USD',
       },
@@ -40,12 +39,22 @@ export const Causes: CollectionConfig = {
     {
       name: 'currentRaised',
       type: 'number',
-      required: true,
       min: 0,
       defaultValue: 0,
       admin: {
         description: 'Amount raised so far in USD',
       },
+    },
+    {
+      name: 'externalImageUrl',
+      type: 'text',
+      label: 'External Image URL',
+    },
+    {
+      name: 'legacyWordPressId',
+      type: 'number',
+      index: true,
+      admin: { readOnly: true, position: 'sidebar' },
     },
   ],
 }

@@ -20,7 +20,22 @@ export const Sermons: CollectionConfig = {
     {
       name: 'speaker',
       type: 'text',
-      required: true,
+      defaultValue: 'Rutendo Jenkins',
+    },
+    {
+      name: 'content',
+      type: 'richText',
+      label: 'Sermon Body',
+    },
+    {
+      name: 'scriptureReference',
+      type: 'text',
+      label: 'Scripture Reference',
+    },
+    {
+      name: 'location',
+      type: 'text',
+      label: 'Location',
     },
     {
       name: 'videoUrl',
@@ -42,7 +57,20 @@ export const Sermons: CollectionConfig = {
       name: 'thumbnail',
       type: 'upload',
       relationTo: 'media',
-      required: true,
+    },
+    {
+      name: 'externalImageUrl',
+      type: 'text',
+      label: 'External Image URL',
+      admin: {
+        description: 'Fallback image URL during migration from WordPress',
+      },
+    },
+    {
+      name: 'legacyWordPressId',
+      type: 'number',
+      index: true,
+      admin: { readOnly: true, position: 'sidebar' },
     },
     {
       name: 'publishDate',

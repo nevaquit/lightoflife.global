@@ -4,4 +4,5 @@ interface CloudflareEnv {
   R2: R2Bucket
   ASSETS: Fetcher
   PAYLOAD_SECRET: string
+  NEXT_PRIVATE_MINIMAL_MODE: string
 }

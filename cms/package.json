@@ -4,17 +4,25 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "cross-env NODE_OPTIONS=\"--no-deprecation --max-old-space-size=8000\" payload build",
-    "deploy": "pnpm run deploy:database && pnpm run deploy:app",
-    "deploy:app": "opennextjs-cloudflare build --env=$CLOUDFLARE_ENV && opennextjs-cloudflare deploy --env=$CLOUDFLARE_ENV",
-    "deploy:database": "cross-env NODE_ENV=production PAYLOAD_SECRET=ignore payload migrate && wrangler d1 execute D1 --command 'PRAGMA optimize' --env=$CLOUDFLARE_ENV --remote",
+    "build": "cross-env NODE_OPTIONS=\"--no-deprecation --max-old-space-size=8000\" next build",
+    "deploy": "npm run deploy:database && npm run deploy:app",
+    "deploy:app": "node --import ./scripts/patch-fs-wasm.mjs ./node_modules/@opennextjs/cloudflare/dist/cli/index.js build && node --import ./scripts/patch-fs-wasm.mjs ./node_modules/@opennextjs/cloudflare/dist/cli/index.js deploy",
+    "deploy:database": "cross-env NODE_ENV=production PAYLOAD_SECRET=ignore payload migrate && wrangler d1 execute lightoflife-cms --command \"PRAGMA optimize\" --remote",
     "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev --port 3001",
     "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
     "generate:types": "pnpm run generate:types:cloudflare && pnpm run generate:types:payload",
     "generate:types:cloudflare": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
     "generate:types:payload": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
-    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview --env=$CLOUDFLARE_ENV"
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview --env=$CLOUDFLARE_ENV",
+    "migrate:fetch": "cross-env NODE_OPTIONS=--no-deprecation tsx src/scripts/migrate/fetch.ts",
+    "migrate:import": "cross-env NODE_OPTIONS=--no-deprecation PAYLOAD_REMOTE_BINDINGS=true tsx src/scripts/migrate/import.ts",
+    "migrate:sync-media": "cross-env NODE_OPTIONS=--no-deprecation PAYLOAD_REMOTE_BINDINGS=true tsx src/scripts/migrate/sync-media.ts",
+    "migrate:backfill-r2": "cross-env NODE_OPTIONS=--no-deprecation PAYLOAD_REMOTE_BINDINGS=true tsx src/scripts/migrate/backfill-r2.ts",
+    "migrate:sync-devotional-media": "cross-env NODE_OPTIONS=--no-deprecation PAYLOAD_REMOTE_BINDINGS=true tsx src/scripts/migrate/sync-devotional-media.ts",
+    "migrate:sync-static-media": "cross-env NODE_OPTIONS=--no-deprecation PAYLOAD_REMOTE_BINDINGS=true tsx src/scripts/migrate/sync-static-media.ts",
+    "migrate:restore-images": "cross-env NODE_OPTIONS=--no-deprecation PAYLOAD_REMOTE_BINDINGS=true tsx src/scripts/migrate/restore-external-images.ts",
+    "migrate:wordpress": "cross-env NODE_OPTIONS=--no-deprecation tsx src/scripts/migrate/index.ts"
   },
   "dependencies": {
     "@opennextjs/cloudflare": "^1.11.0",
@@ -25,7 +33,7 @@
     "@payloadcms/ui": "3.82.1",
     "cross-env": "10.1.0",
     "graphql": "^16.8.1",
-    "next": "15.4.11",
+    "next": "15.5.18",
     "payload": "3.82.1",
     "react": "19.2.1",
     "react-dom": "19.2.1"
@@ -35,6 +43,7 @@
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "typescript": "^5.7.0",
+    "tsx": "^4.19.0",
     "wrangler": "~4.61.1"
   }
 }

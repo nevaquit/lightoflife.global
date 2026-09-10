@@ -13,9 +13,15 @@ const bgUrl = getMediaUrl(
 ---
 
 <section
-  class="relative flex min-h-[70vh] items-center justify-center overflow-hidden bg-oatmeal"
+  class="relative flex min-h-[70vh] items-center justify-center overflow-hidden bg-gradient-to-br from-cream via-oatmeal to-blush-light"
   style={bgUrl ? `background-image: linear-gradient(rgba(44,36,22,0.45), rgba(44,36,22,0.55)), url(${bgUrl}); background-size: cover; background-position: center;` : undefined}
 >
+  {!bgUrl && (
+    <div
+      class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(196,115,107,0.12),transparent_55%)]"
+      aria-hidden="true"
+    />
+  )}
   <div class="relative z-10 mx-auto max-w-4xl px-6 py-24 text-center">
     {block.eyebrow && (
       <p class="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-blush">

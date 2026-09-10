@@ -1,0 +1,83 @@
+---
+import type { NavItem } from '../lib/site'
+
+interface Props {
+  items: NavItem[]
+}
+
+const { items } = Astro.props
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
+---
+
+<ul class="hidden items-center gap-6 lg:flex">
+  {
+    items.map((item) =>
+      item.children?.length ? (
+        <li class="group relative">
+          <a
+            href={item.href}
+            class:list={[
+              'text-sm font-medium uppercase tracking-wider hover:text-terracotta',
+              currentPath === item.href || item.children.some((c) => c.href === currentPath)
+                ? 'text-terracotta'
+                : 'text-charcoal',
+            ]}
+          >
+            {item.label}
+          </a>
+          <ul class="invisible absolute left-0 top-full z-50 min-w-[10rem] rounded-xl border border-oatmeal-dark/50 bg-cream py-2 opacity-0 shadow-lg transition-all group-hover:visible group-hover:opacity-100">
+            {
+              item.children.map((child) => (
+                <li>
+                  <a
+                    href={child.href}
+                    class:list={[
+                      'block px-4 py-2 text-sm hover:bg-oatmeal',
+                      currentPath === child.href ? 'text-terracotta' : 'text-charcoal',
+                    ]}
+                  >
+                    {child.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </li>
+      ) : (
+        <li>
+          <a
+            href={item.href}
+            class:list={[
+              'text-sm font-medium uppercase tracking-wider hover:text-terracotta',
+              currentPath === item.href ? 'text-terracotta' : 'text-charcoal',
+            ]}
+          >
+            {item.label}
+          </a>
+        </li>
+      ),
+    )
+  }
+</ul>
+
+<!-- Mobile nav -->
+<details class="relative lg:hidden">
+  <summary class="cursor-pointer list-none text-sm font-medium uppercase tracking-wider text-charcoal">
+    Menu
+  </summary>
+  <ul class="absolute right-0 top-full z-50 mt-2 min-w-[12rem] rounded-xl border border-oatmeal-dark/50 bg-cream py-2 shadow-lg">
+    {
+      items.flatMap((item) =>
+        item.children?.length
+          ? [{ label: item.label, href: item.href }, ...item.children]
+          : [item],
+      ).map((link) => (
+        <li>
+          <a href={link.href} class="block px-4 py-2 text-sm text-charcoal hover:bg-oatmeal">
+            {link.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</details>

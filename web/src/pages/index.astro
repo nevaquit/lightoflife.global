@@ -1,13 +1,16 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
 import BlockRenderer from '../components/BlockRenderer.astro'
-import { getHomepage } from '../lib/payload'
+import FeaturedDevotionals from '../components/FeaturedDevotionals.astro'
+import { getDevotionals, getHomepage } from '../lib/payload'
 
 let homepage
 let error: string | null = null
+let bulletins: Awaited<ReturnType<typeof getDevotionals>> = []
 
 try {
   homepage = await getHomepage()
+  bulletins = (await getDevotionals(6)).filter((item) => item.type === 'bulletin')
 } catch (e) {
   error = e instanceof Error ? e.message : 'Failed to load homepage'
 }
@@ -27,7 +30,26 @@ try {
         </div>
       </section>
     ) : homepage?.layout?.length ? (
-      <BlockRenderer blocks={homepage.layout} />
+      <>
+        {
+          (() => {
+            const mediaGridIndex = homepage.layout.findIndex(
+              (block) => block.blockType === 'mediaGrid',
+            )
+            const splitAt = mediaGridIndex >= 0 ? mediaGridIndex + 1 : homepage.layout.length
+            const topBlocks = homepage.layout.slice(0, splitAt)
+            const bottomBlocks = homepage.layout.slice(splitAt)
+
+            return (
+              <>
+                <BlockRenderer blocks={topBlocks} />
+                {bulletins.length > 0 && <FeaturedDevotionals devotionals={bulletins} />}
+                <BlockRenderer blocks={bottomBlocks} />
+              </>
+            )
+          })()
+        }
+      </>
     ) : (
       <section class="flex min-h-[60vh] items-center justify-center bg-oatmeal px-6">
         <div class="max-w-lg text-center">

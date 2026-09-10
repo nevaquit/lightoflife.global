@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import PageHero from '../components/PageHero.astro'
+import { site } from '../lib/site'
+
+const { ministry } = site.pages
+const sections =
+  ministry.sections.length > 0
+    ? ministry.sections
+    : [
+        'Light of Life Global reaches nations through worship, teaching, and practical outreach.',
+        'Our ministry pillars include weekly bulletins, sermons and podcast, and global causes that serve vulnerable communities.',
+        'Explore our devotionals for weekly readings, listen to the podcast for faith-centered conversations, and support our causes to partner in global mission.',
+      ]
+---
+
+<BaseLayout title="Ministry — Light of Life Global" description="Explore the ministry pillars of Light of Life Global.">
+  <PageHero title={ministry.title} subtitle="Worship, teaching, and global outreach." />
+
+  <section class="bg-cream py-16">
+    <div class="mx-auto max-w-3xl px-6">
+      <div class="prose prose-lg max-w-none text-charcoal">
+        {sections.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+      <div class="mt-12 grid gap-6 sm:grid-cols-3">
+        <a href="/devotionals" class="card p-6 text-center hover:bg-blush-light/30">
+          <h3 class="font-serif text-lg text-espresso">Weekly Bulletins</h3>
+          <p class="mt-2 text-sm text-stone">Daily readings and ministry updates</p>
+        </a>
+        <a href="/sermons" class="card p-6 text-center hover:bg-blush-light/30">
+          <h3 class="font-serif text-lg text-espresso">Sermons & Podcast</h3>
+          <p class="mt-2 text-sm text-stone">Messages of faith and hope</p>
+        </a>
+        <a href="/causes" class="card p-6 text-center hover:bg-blush-light/30">
+          <h3 class="font-serif text-lg text-espresso">Global Outreach</h3>
+          <p class="mt-2 text-sm text-stone">Support missions worldwide</p>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

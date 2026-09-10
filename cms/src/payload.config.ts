@@ -20,11 +20,14 @@ const dirname = path.dirname(filename)
 const realpath = (value: string) => (fs.existsSync(value) ? fs.realpathSync(value) : undefined)
 
 const isCLI = process.argv.some((value) => realpath(value)?.endsWith(path.join('payload', 'bin.js')))
+const isMigrateScript = process.argv.some((value) => /migrate[\\/]/.test(value))
 const isProduction = process.env.NODE_ENV === 'production'
+const remoteBindings =
+  process.env.PAYLOAD_REMOTE_BINDINGS === 'true' || isProduction
 
 const cloudflare =
-  isCLI || !isProduction
-    ? await getCloudflareContextFromWrangler()
+  isCLI || isMigrateScript || !isProduction
+    ? await getCloudflareContextFromWrangler(remoteBindings)
     : await getCloudflareContext({ async: true })
 
 export default buildConfig({
@@ -53,7 +56,7 @@ export default buildConfig({
     binding: cloudflare.env.D1,
     readReplicas: 'first-primary',
   }),
-  storage: [
+  plugins: [
     r2Storage({
       bucket: cloudflare.env.R2,
       collections: { media: true },
@@ -61,12 +64,12 @@ export default buildConfig({
   ],
 })
 
-function getCloudflareContextFromWrangler() {
+function getCloudflareContextFromWrangler(useRemoteBindings: boolean) {
   return import(/* webpackIgnore: true */ `${'__wrangler'.replaceAll('_', '')}`).then(
     ({ getPlatformProxy }) =>
       getPlatformProxy({
         environment: process.env.CLOUDFLARE_ENV,
-        remoteBindings: isProduction,
+        remoteBindings: useRemoteBindings,
       } satisfies GetPlatformProxyOptions),
   )
 }

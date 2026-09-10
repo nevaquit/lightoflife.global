@@ -1,0 +1,32 @@
+---
+import type { Devotional } from '../lib/payload'
+import BlogCard from './BlogCard.astro'
+
+interface Props {
+  devotionals: Devotional[]
+  emptyMessage?: string
+  showFeatured?: boolean
+}
+
+const { devotionals, emptyMessage = 'No items published yet.', showFeatured = true } = Astro.props
+const [featured, ...rest] = showFeatured && devotionals.length > 0 ? devotionals : [null, ...devotionals]
+---
+
+{
+  devotionals.length === 0 ? (
+    <p class="rounded-2xl border border-dashed border-oatmeal-dark bg-oatmeal/50 py-16 text-center text-stone">
+      {emptyMessage}
+    </p>
+  ) : (
+    <div class="space-y-10">
+      {featured && <BlogCard devotional={featured} featured />}
+      {rest.length > 0 && (
+        <div class="grid gap-8 sm:grid-cols-2">
+          {rest.map((devotional) => (
+            <BlogCard devotional={devotional} />
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}

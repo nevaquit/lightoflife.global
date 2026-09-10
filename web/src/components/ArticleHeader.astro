@@ -1,0 +1,59 @@
+---
+import type { Devotional } from '../lib/payload'
+import { getDevotionalImage } from '../lib/payload'
+import ContentImage from './ContentImage.astro'
+
+interface Props {
+  devotional: Devotional
+  backHref?: string
+  backLabel?: string
+}
+
+const { devotional, backHref = '/blog', backLabel = 'Back to Blog' } = Astro.props
+const imgUrl = getDevotionalImage(devotional)
+const date = new Date(devotional.publishDate).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+})
+const typeLabel =
+  devotional.type === 'bulletin' ? 'Weekly Bulletin' : devotional.type === 'prayer' ? 'Prayer' : 'Article'
+---
+
+<header class="border-b border-oatmeal-dark/40 bg-oatmeal">
+  <div class="mx-auto max-w-4xl px-6 pb-12 pt-8">
+    <a
+      href={backHref}
+      class="inline-flex items-center gap-1 text-sm font-medium text-stone hover:text-terracotta"
+    >
+      <span aria-hidden="true">←</span> {backLabel}
+    </a>
+
+    <div class="mt-8 flex flex-wrap items-center gap-3">
+      <span class="rounded-full bg-cream px-3 py-1 text-xs font-semibold uppercase tracking-wider text-terracotta">
+        {typeLabel}
+      </span>
+      <time class="text-sm text-stone" datetime={devotional.publishDate}>{date}</time>
+    </div>
+
+    {devotional.scriptureReference && (
+      <p class="mt-6 border-l-4 border-terracotta pl-4 font-serif text-lg italic text-terracotta-dark">
+        {devotional.scriptureReference}
+      </p>
+    )}
+
+    <h1 class="mt-6 font-serif text-4xl font-medium leading-tight text-espresso md:text-5xl">
+      {devotional.title}
+    </h1>
+  </div>
+
+  {
+    imgUrl && (
+      <div class="mx-auto max-w-5xl px-6 pb-12">
+        <div class="overflow-hidden rounded-2xl border border-oatmeal-dark/50 bg-cream shadow-md">
+          <ContentImage src={imgUrl} alt={devotional.title} variant="graphic" class="!aspect-[21/9]" />
+        </div>
+      </div>
+    )
+  }
+</header>

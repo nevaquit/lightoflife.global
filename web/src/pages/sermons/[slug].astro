@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
-import { getSermonBySlug, getMediaUrl } from '../../lib/payload'
+import ContentImage from '../../components/ContentImage.astro'
+import { getSermonBySlug, getSermonImage } from '../../lib/payload'
+import { lexicalToHtml } from '../../lib/lexical'
 
 const { slug } = Astro.params
 const sermon = slug ? await getSermonBySlug(slug) : null
@@ -9,9 +11,8 @@ if (!sermon) {
   return Astro.redirect('/sermons')
 }
 
-const thumbUrl = getMediaUrl(
-  typeof sermon.thumbnail === 'object' ? sermon.thumbnail : undefined,
-)
+const thumbUrl = getSermonImage(sermon)
+const bodyHtml = lexicalToHtml(sermon.content)
 ---
 
 <BaseLayout title={`${sermon.title} — Light of Life Global`}>
@@ -32,7 +33,9 @@ const thumbUrl = getMediaUrl(
 
     <section class="mx-auto max-w-4xl px-6 py-12">
       {thumbUrl && (
-        <img src={thumbUrl} alt={sermon.title} class="mb-10 w-full rounded-2xl shadow-md" />
+        <div class="mx-auto mb-10 max-w-lg overflow-hidden rounded-2xl shadow-md">
+          <ContentImage src={thumbUrl} alt={sermon.title} variant="sermon" />
+        </div>
       )}
 
       {sermon.videoUrl && (
@@ -53,6 +56,12 @@ const thumbUrl = getMediaUrl(
           <audio controls class="w-full" src={sermon.audioUrl}>
             Your browser does not support the audio element.
           </audio>
+        </div>
+      )}
+
+      {bodyHtml && (
+        <div class="prose prose-lg mt-10 max-w-none text-charcoal">
+          <Fragment set:html={bodyHtml} />
         </div>
       )}
     </section>
