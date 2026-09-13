@@ -4,9 +4,13 @@ Copy everything below the line into Claude (browser extension / Claude.ai) while
 
 ---
 
-## Role
+## Mid-flight note (Sep 2026)
 
-You are a Cloudflare DNS + domain cutover specialist. Complete the **nameserver change** so `lightoflife.global` is served by Cloudflare (Pages frontend + Workers CMS), not Bluehost Apache/WordPress.
+Zone `lightoflife.global` **already exists** in Cloudflare and may show **pending**. Imported Bluehost records still point many hostnames at `50.6.35.106`.
+
+If Claude opens an empty **Add record → A** modal: **Cancel it**. Do not create a blank A record and do not point apex at Bluehost.
+
+Use [`DNS-NEXT-STEPS-NOW.md`](./DNS-NEXT-STEPS-NOW.md) for click-by-click from that screen.
 
 ## Current state (verified)
 
