@@ -1,0 +1,61 @@
+name: Fix apex DNS
+
+on:
+  workflow_dispatch:
+
+jobs:
+  restore-apex:
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      ZONE_ID: 51d87d613138ef69262be1f6de1f4f74
+    steps:
+      - name: Restore lightoflife.global apex DNS
+        run: |
+          set -euo pipefail
+          CF_AUTH="Authorization: Bearer ${CLOUDFLARE_API_TOKEN}"
+
+          echo "::group::Existing DNS records"
+          curl -sS -H "$CF_AUTH" \
+            "https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/dns_records?per_page=100"
+          echo
+          echo "::endgroup::"
+
+          echo "::group::Detach apex Worker custom domain if present"
+          DOMAINS_JSON=$(curl -sS -H "$CF_AUTH" \
+            "https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/workers/domains")
+          echo "$DOMAINS_JSON"
+          APEX_ID=$(echo "$DOMAINS_JSON" | jq -r '.result[]? | select(.hostname=="lightoflife.global") | .id' | head -n1)
+          if [ -n "${APEX_ID}" ]; then
+            curl -sS -X DELETE -H "$CF_AUTH" \
+              "https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/workers/domains/${APEX_ID}"
+            echo
+          else
+            echo "No apex Worker domain attached"
+          fi
+          echo "::endgroup::"
+
+          echo "::group::Create apex CNAME to Pages"
+          CNAME_RESP=$(curl -sS -X POST -H "$CF_AUTH" -H "Content-Type: application/json" \
+            "https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/dns_records" \
+            --data '{"type":"CNAME","name":"@","content":"lightoflife-web.pages.dev","proxied":true,"ttl":1,"comment":"Apex to Cloudflare Pages"}')
+          echo "$CNAME_RESP"
+          echo "::endgroup::"
+
+          SUCCESS=$(echo "$CNAME_RESP" | jq -r '.success')
+          if [ "$SUCCESS" != "true" ]; then
+            echo "::group::Fallback AAAA 100:: placeholder"
+            curl -sS -X POST -H "$CF_AUTH" -H "Content-Type: application/json" \
+              "https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/dns_records" \
+              --data '{"type":"AAAA","name":"@","content":"100::","proxied":true,"ttl":1,"comment":"Apex placeholder for Worker/Pages"}'
+            echo
+            echo "::endgroup::"
+          fi
+
+          echo "::group::Attach Pages custom domain"
+          curl -sS -X POST -H "$CF_AUTH" -H "Content-Type: application/json" \
+            "https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects/lightoflife-web/domains" \
+            --data '{"name":"lightoflife.global"}'
+          echo
+          echo "::endgroup::"
