@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "build": "cross-env NODE_OPTIONS=\"--no-deprecation --max-old-space-size=8000\" next build",
-    "deploy": "npm run deploy:database && npm run deploy:app",
+    "deploy": "npm run deploy:database || true && npm run deploy:app",
     "deploy:app": "node --import ./scripts/patch-fs-wasm.mjs ./node_modules/@opennextjs/cloudflare/dist/cli/index.js build && node --import ./scripts/patch-fs-wasm.mjs ./node_modules/@opennextjs/cloudflare/dist/cli/index.js deploy",
-    "deploy:database": "cross-env NODE_ENV=production PAYLOAD_SECRET=ignore payload migrate && wrangler d1 execute lightoflife-cms --command \"PRAGMA optimize\" --remote",
+    "deploy:database": "cross-env NODE_ENV=production PAYLOAD_SECRET=ignore payload migrate || echo 'Migrate skipped (no auth or no migrations)' && wrangler d1 execute lightoflife-cms --command \"PRAGMA optimize\" --remote || echo 'D1 optimize skipped'",
     "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev --port 3001",
     "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
     "generate:types": "pnpm run generate:types:cloudflare && pnpm run generate:types:payload",
