@@ -4,6 +4,7 @@ import ArticleHeader from '../../components/ArticleHeader.astro'
 import ArticleProse from '../../components/ArticleProse.astro'
 import { getDevotionalBySlug } from '../../lib/payload'
 import { lexicalToHtml } from '../../lib/lexical'
+import { CMS_BASE_URL } from '../../lib/payload'
 
 const { slug } = Astro.params
 const devotional = slug ? await getDevotionalBySlug(slug) : null
@@ -12,7 +13,7 @@ if (!devotional) {
   return Astro.redirect('/devotionals')
 }
 
-const bodyHtml = lexicalToHtml(devotional.content)
+const bodyHtml = lexicalToHtml(devotional.content, CMS_BASE_URL)
 const backHref = devotional.type === 'prayer' ? '/prayers' : devotional.type === 'bulletin' ? '/blog' : '/devotionals'
 const backLabel =
   devotional.type === 'prayer' ? 'Back to Prayers' : devotional.type === 'bulletin' ? 'Back to Blog' : 'Back to Bulletins'

@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro'
 import ContentImage from '../../components/ContentImage.astro'
 import { getSermonBySlug, getSermonImage } from '../../lib/payload'
 import { lexicalToHtml } from '../../lib/lexical'
+import { CMS_BASE_URL } from '../../lib/payload'
 
 const { slug } = Astro.params
 const sermon = slug ? await getSermonBySlug(slug) : null
@@ -12,7 +13,7 @@ if (!sermon) {
 }
 
 const thumbUrl = getSermonImage(sermon)
-const bodyHtml = lexicalToHtml(sermon.content)
+const bodyHtml = lexicalToHtml(sermon.content, CMS_BASE_URL)
 ---
 
 <BaseLayout title={`${sermon.title} — Light of Life Global`}>

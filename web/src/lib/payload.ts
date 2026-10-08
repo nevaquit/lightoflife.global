@@ -2,6 +2,8 @@ import cmsMediaMap from '../data/cms-media-map.json'
 
 const CMS_URL = import.meta.env.PUBLIC_CMS_URL || 'http://localhost:3001'
 
+export const CMS_BASE_URL = CMS_URL
+
 type MediaMap = {
   sermons: Record<string, string>
   causes: Record<string, string>
@@ -148,9 +150,24 @@ export function getCauseImage(cause: Cause): string | undefined {
   )
 }
 
+/** Extract the first image URL from Lexical content upload nodes. */
+export function getFirstContentImage(content: unknown): string | undefined {
+  if (!content || typeof content !== 'object') return undefined
+  const children = (content as { root?: { children?: Array<{ type?: string; value?: { url?: string } | number | string }> }).root?.children
+  if (!children) return undefined
+  for (const node of children) {
+    if (node.type === 'upload' && node.value && typeof node.value === 'object' && node.value.url) {
+      const url = node.value.url
+      return url.startsWith('http') ? url : `${CMS_URL}${url}`
+    }
+  }
+  return undefined
+}
+
 export function getDevotionalImage(devotional: Devotional): string | undefined {
   return (
     getMediaUrl(typeof devotional.thumbnail === 'object' ? devotional.thumbnail : undefined) ||
+    getFirstContentImage(devotional.content) ||
     cmsImages.devotionals[devotional.slug]
   )
 }

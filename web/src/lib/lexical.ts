@@ -9,7 +9,8 @@ type LexicalElementNode = {
   tag?: string
   children?: LexicalNode[]
   listType?: 'bullet' | 'number'
-  value?: number
+  value?: number | { id?: string | number; url?: string; alt?: string }
+  relationTo?: string
 }
 
 type LexicalNode = LexicalTextNode | LexicalElementNode
@@ -40,17 +41,35 @@ function renderText(node: LexicalTextNode): string {
   return text
 }
 
-function renderChildren(children: LexicalNode[] | undefined): string {
-  return (children ?? []).map(renderNode).join('')
+function renderChildren(children: LexicalNode[] | undefined, cmsUrl = ''): string {
+  return (children ?? []).map((node) => renderNode(node, cmsUrl)).join('')
 }
 
-function renderNode(node: LexicalNode): string {
+function renderUpload(node: LexicalElementNode, cmsUrl: string): string {
+  const value = node.value
+  let url: string | undefined
+  let alt = ''
+  if (value && typeof value === 'object') {
+    url = value.url
+    alt = value.alt ?? ''
+  }
+  if (!url) return ''
+  const src = url.startsWith('http') ? url : `${cmsUrl}${url}`
+  return `<figure class="my-8"><img src="${src}" alt="${escapeHtml(alt)}" class="w-full rounded-xl" loading="lazy" /></figure>`
+}
+
+function renderNode(node: LexicalNode, cmsUrl = ''): string {
   if (node.type === 'text') {
     return renderText(node as LexicalTextNode)
   }
 
   const element = node as LexicalElementNode
-  const inner = renderChildren(element.children)
+
+  if (element.type === 'upload') {
+    return renderUpload(element, cmsUrl)
+  }
+
+  const inner = renderChildren(element.children, cmsUrl)
 
   switch (element.type) {
     case 'paragraph':
@@ -87,11 +106,11 @@ function collectPlainText(children: LexicalNode[] | undefined): string {
     .trim()
 }
 
-export function lexicalToHtml(content: unknown): string {
+export function lexicalToHtml(content: unknown, cmsUrl = ''): string {
   if (!content || typeof content !== 'object') return ''
 
   const root = content as LexicalRoot
-  const html = renderChildren(root.root?.children)
+  const html = renderChildren(root.root?.children, cmsUrl)
 
   return html || ''
 }
