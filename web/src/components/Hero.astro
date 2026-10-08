@@ -22,29 +22,31 @@ const bgUrl = getMediaUrl(
       aria-hidden="true"
     />
   )}
-  <div class="relative z-10 mx-auto max-w-4xl px-6 py-24 text-center">
-    {block.eyebrow && (
-      <p class="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-blush">
-        {block.eyebrow}
-      </p>
-    )}
-    <h1 class={`text-4xl font-semibold leading-tight md:text-6xl ${bgUrl ? 'text-cream' : 'text-espresso'}`}>
-      {block.headline}
-    </h1>
-    {block.subheadline && (
-      <p class={`mt-6 text-lg md:text-xl ${bgUrl ? 'text-oatmeal' : 'text-stone'}`}>
-        {block.subheadline}
-      </p>
-    )}
-    <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
-      <a href={block.primaryCta.url} class="btn-primary">
-        {block.primaryCta.label}
-      </a>
-      {block.secondaryCta?.label && block.secondaryCta?.url && (
-        <a href={block.secondaryCta.url} class={bgUrl ? 'btn-secondary border-cream text-cream hover:bg-cream/10' : 'btn-secondary'}>
-          {block.secondaryCta.label}
-        </a>
+  {!bgUrl && (
+    <div class="relative z-10 mx-auto max-w-4xl px-6 py-24 text-center">
+      {block.eyebrow && (
+        <p class="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-blush">
+          {block.eyebrow}
+        </p>
       )}
+      <h1 class="text-4xl font-semibold leading-tight text-espresso md:text-6xl">
+        {block.headline}
+      </h1>
+      {block.subheadline && (
+        <p class="mt-6 text-lg text-stone md:text-xl">
+          {block.subheadline}
+        </p>
+      )}
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+        <a href={block.primaryCta.url} class="btn-primary">
+          {block.primaryCta.label}
+        </a>
+        {block.secondaryCta?.label && block.secondaryCta?.url && (
+          <a href={block.secondaryCta.url} class="btn-secondary">
+            {block.secondaryCta.label}
+          </a>
+        )}
+      </div>
     </div>
-  </div>
+  )}
 </section>
