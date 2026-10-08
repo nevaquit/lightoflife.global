@@ -36,7 +36,8 @@ jobs:
   deploy-web:
     name: Deploy Frontend (Pages)
     runs-on: ubuntu-latest
-    needs: deploy-cms
+    # Removed 'needs: deploy-cms' so frontend can deploy independently
+    # when the CMS build is broken. The CMS API is backwards compatible.
     steps:
       - uses: actions/checkout@v4
 
