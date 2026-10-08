@@ -153,7 +153,7 @@ export function getCauseImage(cause: Cause): string | undefined {
 /** Extract the first image URL from Lexical content upload nodes. */
 export function getFirstContentImage(content: unknown): string | undefined {
   if (!content || typeof content !== 'object') return undefined
-  const children = (content as { root?: { children?: Array<{ type?: string; value?: { url?: string } | number | string }> }).root?.children
+  const children = (content as { root?: { children?: Array<{ type?: string; value?: { url?: string } | number | string }> } }).root?.children
   if (!children) return undefined
   for (const node of children) {
     if (node.type === 'upload' && node.value && typeof node.value === 'object' && node.value.url) {
