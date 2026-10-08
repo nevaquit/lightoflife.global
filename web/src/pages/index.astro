@@ -33,10 +33,11 @@ try {
       <>
         {
           (() => {
-            const mediaGridIndex = homepage.layout.findIndex(
-              (block) => block.blockType === 'mediaGrid',
+            // Latest Bulletin goes directly under the slideshow (hero)
+            const heroIndex = homepage.layout.findIndex(
+              (block) => block.blockType === 'hero',
             )
-            const splitAt = mediaGridIndex >= 0 ? mediaGridIndex + 1 : homepage.layout.length
+            const splitAt = heroIndex >= 0 ? heroIndex + 1 : 0
             const topBlocks = homepage.layout.slice(0, splitAt)
             const bottomBlocks = homepage.layout.slice(splitAt)
 
