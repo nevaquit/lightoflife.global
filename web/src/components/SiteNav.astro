@@ -62,8 +62,10 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
 
 <!-- Mobile nav -->
 <details class="relative lg:hidden">
-  <summary class="cursor-pointer list-none text-sm font-medium uppercase tracking-wider text-charcoal">
-    Menu
+  <summary class="cursor-pointer list-none p-2 text-charcoal" aria-label="Open menu">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
   </summary>
   <ul class="absolute right-0 top-full z-50 mt-2 min-w-[12rem] rounded-xl border border-oatmeal-dark/50 bg-cream py-2 shadow-lg">
     {

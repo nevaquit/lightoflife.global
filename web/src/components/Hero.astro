@@ -14,7 +14,7 @@ const bgUrl = getMediaUrl(
 
 <section
   class="relative flex min-h-[70vh] items-center justify-center overflow-hidden bg-gradient-to-br from-cream via-oatmeal to-blush-light"
-  style={bgUrl ? `background-image: linear-gradient(rgba(44,36,22,0.45), rgba(44,36,22,0.55)), url(${bgUrl}); background-size: cover; background-position: center;` : undefined}
+  style={bgUrl ? `background-image: url(${bgUrl}); background-size: cover; background-position: 75% center;` : undefined}
 >
   {!bgUrl && (
     <div
