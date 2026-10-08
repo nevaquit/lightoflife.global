@@ -1,22 +1,22 @@
 @import "tailwindcss";
 
 @theme {
-  /* Warm cream & oatmeal backgrounds */
-  --color-cream: #faf7f2;
-  --color-oatmeal: #f0ebe3;
-  --color-oatmeal-dark: #e5ddd2;
+  /* Candace Owens inspired: black, white, dark navy, gold */
+  --color-cream: #ffffff;
+  --color-oatmeal: #f7f7f7;
+  --color-oatmeal-dark: #e8e8e8;
 
-  /* Peachy-blush & terracotta-rose accents */
-  --color-blush: #f4c4b0;
-  --color-blush-light: #fae8df;
-  --color-terracotta: #c4736b;
-  --color-terracotta-dark: #a85d55;
-  --color-rose: #d4897f;
+  /* Gold accents */
+  --color-blush: #dcb66a;
+  --color-blush-light: #faf3e6;
+  --color-terracotta: #c9a227;
+  --color-terracotta-dark: #a8861f;
+  --color-rose: #dcb66a;
 
-  /* Espresso / charcoal typography */
-  --color-espresso: #2c2416;
-  --color-charcoal: #3d3d3d;
-  --color-stone: #6b6560;
+  /* Black / dark navy typography */
+  --color-espresso: #000000;
+  --color-charcoal: #1c2131;
+  --color-stone: #555555;
 
   --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
   --font-sans: "DM Sans", system-ui, -apple-system, sans-serif;
